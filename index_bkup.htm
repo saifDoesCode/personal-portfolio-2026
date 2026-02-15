@@ -19,9 +19,9 @@
   --text-tertiary: #999999;
   --accent: #2563eb;
   --accent-hover: #1d4ed8;
-  --coral: #708090;
-  --coral-light: #8a9bab;
-  --coral-bg: rgba(112, 128, 144, 0.08);
+  --coral: #d17a5c;
+  --coral-light: #e89b7e;
+  --coral-bg: rgba(209, 122, 92, 0.08);
   --dark: #1a1a1a;
   --border: #e5e5e7;
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
@@ -234,7 +234,7 @@ section { padding: 100px 32px; }
   background: var(--coral); color: #fff;
   box-shadow: 0 2px 8px rgba(209, 122, 92, 0.3);
 }
-.btn-coral:hover { background: #5a6a7a; box-shadow: 0 6px 20px rgba(112, 128, 144, 0.35); }
+.btn-coral:hover { background: #c06a4c; box-shadow: 0 6px 20px rgba(209, 122, 92, 0.35); }
 .btn-secondary {
   background: var(--bg-tertiary); color: var(--text-primary);
   border: 1px solid var(--border);
@@ -411,115 +411,20 @@ section { padding: 100px 32px; }
 }
 .edu-info p { font-size: 15px; color: var(--text-secondary); font-weight: 500; }
 
-.certs-heading {
-  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 22px; font-weight: 700; letter-spacing: -0.02em;
-  color: var(--text-primary); margin-top: 48px; margin-bottom: 20px;
-}
-
-.certs-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
-}
-
-.cert-card {
-  background: var(--bg-primary); border-radius: var(--radius-sm);
-  padding: 20px 24px; border: 1px solid var(--border);
-  display: flex; align-items: center; gap: 16px;
-  text-decoration: none; color: inherit;
-  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
-}
-.cert-card:hover {
-  transform: translateY(-4px); box-shadow: var(--shadow-lg);
-  border-color: var(--coral-light);
-}
-
-.cert-icon {
-  width: 40px; height: 40px; border-radius: 10px;
-  background: var(--bg-tertiary);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
-
-.cert-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-.cert-name {
-  font-size: 14px; font-weight: 600; color: var(--text-primary);
-  letter-spacing: -0.01em;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.cert-source {
-  font-size: 12px; color: var(--text-tertiary); font-weight: 500;
-  font-style: italic;
-}
-
-.cert-arrow {
-  margin-left: auto; flex-shrink: 0; color: var(--text-tertiary);
-  transition: color var(--transition), transform var(--transition);
-}
-.cert-card:hover .cert-arrow { color: var(--coral); transform: translateX(3px); }
-
 /* ============================================================
    PROJECTS
    ============================================================ */
 #projects { background: var(--bg-primary); }
 
-.project-item {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 56px; align-items: center;
-  margin-bottom: 80px;
+.projects-placeholder {
+  background: var(--bg-secondary); border-radius: var(--radius);
+  border: 2px dashed var(--border); padding: 64px 40px;
+  text-align: center;
 }
-.project-item:last-child { margin-bottom: 0; }
-
-.project-item--reverse {
-  direction: rtl;
-}
-.project-item--reverse > * {
-  direction: ltr;
-}
-
-.project-screenshot {
-  border-radius: var(--radius); overflow: hidden;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-md);
-  transition: transform var(--transition), box-shadow var(--transition);
-}
-.project-screenshot:hover {
-  transform: translateY(-4px); box-shadow: var(--shadow-lg);
-}
-.project-screenshot img {
-  width: 100%; height: auto; display: block;
-}
-
-.project-details {
-  display: flex; flex-direction: column; gap: 18px;
-}
-
-.project-title {
-  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: clamp(28px, 4vw, 40px); font-weight: 700;
-  letter-spacing: -0.03em; line-height: 1.1;
-  color: var(--text-primary);
-}
-
-.project-desc {
-  font-size: 15.5px; color: var(--text-secondary);
-  line-height: 1.7; max-width: 480px;
-}
-
-.project-link {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 14px; font-weight: 500; color: var(--coral);
-  text-decoration: none; word-break: break-all;
-  transition: color var(--transition);
-}
-.project-link:hover { color: var(--text-primary); }
-
-.project-screenshot--placeholder {
-  background: var(--bg-secondary); aspect-ratio: 4/3;
-  display: flex; align-items: center; justify-content: center;
-}
-.project-placeholder-inner {
-  display: flex; flex-direction: column; align-items: center; gap: 12px;
-  color: var(--text-tertiary); font-size: 15px; font-weight: 600;
+.projects-placeholder svg { margin-bottom: 20px; opacity: 0.5; }
+.projects-placeholder p {
+  font-size: 16px; color: var(--text-secondary);
+  max-width: 460px; margin: 0 auto;
 }
 
 /* ============================================================
@@ -637,10 +542,7 @@ footer {
   .skills-top { grid-template-columns: 1fr; }
   .skills-grid { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
-  .project-item, .project-item--reverse { grid-template-columns: 1fr; direction: ltr; gap: 32px; }
-  .project-item { margin-bottom: 56px; }
   .edu-card { flex-direction: column; text-align: center; }
-  .certs-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
@@ -690,7 +592,7 @@ footer {
     <div class="hero-grid">
       <div class="hero-content">
         <div class="hero-name-row">
-          <img src="images/profile.png" alt="Saif Ahmed" class="hero-avatar">
+          <img src="profile.png" alt="Saif Ahmed" class="hero-avatar">
           <h1 class="hero-name">Saif Ahmed.</h1>
         </div>
         <p class="hero-role">AI Software Engineer</p>
@@ -722,12 +624,12 @@ footer {
   <div class="container">
     <div class="reveal">
       <span class="section-label">01 Experience</span>
-      <h2 class="section-title">Where I've worked.</h2>
+      <h2 class="section-title">Where I've worked</h2>
     </div>
     <div class="experience-grid">
       <div class="exp-card reveal" style="transition-delay: 0.1s;">
         <div class="exp-card-header">
-          <div class="exp-icon" style="background: linear-gradient(135deg, #708090, #8a9bab);">N</div>
+          <div class="exp-icon" style="background: linear-gradient(135deg, #d17a5c, #e89b7e);">N</div>
           <div class="exp-card-meta">
             <span class="exp-company">NEOSYS</span>
             <span class="exp-role">Software Engineer (AI, Linux, IT)</span>
@@ -787,34 +689,34 @@ footer {
     <div class="skills-top reveal">
       <div class="skills-top-text">
         <span class="section-label">02 Skills & Technologies</span>
-        <h2 class="section-title" style="margin-bottom: 16px;">My toolkit.</h2>
+        <h2 class="section-title" style="margin-bottom: 16px;">My toolkit</h2>
         <p style="color: var(--text-secondary); max-width: 420px;">A blend of programming, machine learning, DevOps, and design skills refined through real-world projects.</p>
       </div>
       <div class="skills-illustration">
         <svg viewBox="0 0 360 280" fill="none" xmlns="http://www.w3.org/2000/svg">
           <!-- Data flow lines -->
-          <path d="M40,140 Q100,80 180,140 T320,140" stroke="#708090" stroke-width="2" opacity="0.4" class="draw-path"/>
+          <path d="M40,140 Q100,80 180,140 T320,140" stroke="#d17a5c" stroke-width="2" opacity="0.4" class="draw-path"/>
           <path d="M40,160 Q120,220 180,160 T320,160" stroke="#1a1a1a" stroke-width="1.5" opacity="0.3" class="draw-path" style="animation-delay:0.3s"/>
-          <path d="M60,100 L140,140 L220,110 L300,150" stroke="#8a9bab" stroke-width="1.5" opacity="0.35" class="draw-path" style="animation-delay:0.6s"/>
+          <path d="M60,100 L140,140 L220,110 L300,150" stroke="#e89b7e" stroke-width="1.5" opacity="0.35" class="draw-path" style="animation-delay:0.6s"/>
 
           <!-- Nodes -->
-          <circle class="node-dot" cx="40" cy="140" r="6" fill="#708090"/>
+          <circle class="node-dot" cx="40" cy="140" r="6" fill="#d17a5c"/>
           <circle class="node-dot" cx="120" cy="110" r="6" fill="#1a1a1a" style="animation-delay:0.5s"/>
-          <circle class="node-dot" cx="180" cy="140" r="7" fill="#708090" style="animation-delay:1s"/>
-          <circle class="node-dot" cx="240" cy="120" r="5" fill="#8a9bab" style="animation-delay:1.5s"/>
+          <circle class="node-dot" cx="180" cy="140" r="7" fill="#d17a5c" style="animation-delay:1s"/>
+          <circle class="node-dot" cx="240" cy="120" r="5" fill="#e89b7e" style="animation-delay:1.5s"/>
           <circle class="node-dot" cx="320" cy="140" r="6" fill="#1a1a1a" style="animation-delay:2s"/>
 
           <!-- Secondary nodes -->
-          <circle class="node-dot" cx="80" cy="180" r="4" fill="#8a9bab" style="animation-delay:0.8s"/>
-          <circle class="node-dot" cx="200" cy="190" r="5" fill="#708090" style="animation-delay:1.2s"/>
+          <circle class="node-dot" cx="80" cy="180" r="4" fill="#e89b7e" style="animation-delay:0.8s"/>
+          <circle class="node-dot" cx="200" cy="190" r="5" fill="#d17a5c" style="animation-delay:1.2s"/>
           <circle class="node-dot" cx="280" cy="170" r="4" fill="#1a1a1a" style="animation-delay:1.8s"/>
 
           <!-- Connector lines between nodes -->
-          <line x1="40" y1="140" x2="120" y2="110" stroke="#708090" stroke-width="1" opacity="0.2"/>
+          <line x1="40" y1="140" x2="120" y2="110" stroke="#d17a5c" stroke-width="1" opacity="0.2"/>
           <line x1="120" y1="110" x2="180" y2="140" stroke="#1a1a1a" stroke-width="1" opacity="0.2"/>
-          <line x1="180" y1="140" x2="240" y2="120" stroke="#8a9bab" stroke-width="1" opacity="0.2"/>
-          <line x1="240" y1="120" x2="320" y2="140" stroke="#708090" stroke-width="1" opacity="0.2"/>
-          <line x1="80" y1="180" x2="180" y2="140" stroke="#8a9bab" stroke-width="1" opacity="0.15"/>
+          <line x1="180" y1="140" x2="240" y2="120" stroke="#e89b7e" stroke-width="1" opacity="0.2"/>
+          <line x1="240" y1="120" x2="320" y2="140" stroke="#d17a5c" stroke-width="1" opacity="0.2"/>
+          <line x1="80" y1="180" x2="180" y2="140" stroke="#e89b7e" stroke-width="1" opacity="0.15"/>
           <line x1="200" y1="190" x2="280" y2="170" stroke="#1a1a1a" stroke-width="1" opacity="0.15"/>
         </svg>
       </div>
@@ -881,7 +783,7 @@ footer {
   <div class="container">
     <div class="reveal">
       <span class="section-label">03 Education</span>
-      <h2 class="section-title">Academic background.</h2>
+      <h2 class="section-title">Academic background</h2>
     </div>
     <div class="edu-card reveal" style="transition-delay: 0.1s;">
       <div class="edu-logo">
@@ -889,62 +791,8 @@ footer {
       </div>
       <div class="edu-info">
         <h3>Bachelor of Computer Science</h3>
-        <p>University of Wollongong, Dubai</p>
+        <p>University of Wollongong</p>
       </div>
-    </div>
-
-    <h3 class="certs-heading reveal" style="transition-delay: 0.2s;">Courses & Certifications</h3>
-    <div class="certs-grid">
-      <a href="https://www.datacamp.com/completed/statement-of-accomplishment/course/84ea41fea08a04ea31307ab447d3cadfc304f58e" target="_blank" rel="noopener" class="cert-card reveal" style="transition-delay: 0.25s;">
-        <div class="cert-icon">
-          <svg width="20" height="20" fill="none" stroke="var(--coral)" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="10" r="8"/><path d="M7 10l2 2 4-4"/></svg>
-        </div>
-        <div class="cert-info">
-          <span class="cert-name">AI Ethics</span>
-          <span class="cert-source">DataCamp</span>
-        </div>
-        <svg class="cert-arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 4l4 4-4 4"/></svg>
-      </a>
-      <a href="http://verify.skilljar.com/c/79ksexwjicqv" target="_blank" rel="noopener" class="cert-card reveal" style="transition-delay: 0.3s;">
-        <div class="cert-icon">
-          <svg width="20" height="20" fill="none" stroke="var(--coral)" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="10" r="8"/><path d="M7 10l2 2 4-4"/></svg>
-        </div>
-        <div class="cert-info">
-          <span class="cert-name">Model Context Protocol: Advanced Topics</span>
-          <span class="cert-source">Skilljar</span>
-        </div>
-        <svg class="cert-arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 4l4 4-4 4"/></svg>
-      </a>
-      <a href="https://www.credly.com/badges/ecb3ea36-5a00-4061-8ad2-de51c6723d6f/linked_in_profile" target="_blank" rel="noopener" class="cert-card reveal" style="transition-delay: 0.35s;">
-        <div class="cert-icon">
-          <svg width="20" height="20" fill="none" stroke="var(--coral)" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="10" r="8"/><path d="M7 10l2 2 4-4"/></svg>
-        </div>
-        <div class="cert-info">
-          <span class="cert-name">Cybersecurity Fundamentals</span>
-          <span class="cert-source">Credly</span>
-        </div>
-        <svg class="cert-arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 4l4 4-4 4"/></svg>
-      </a>
-      <a href="https://www.credly.com/badges/6eb90c2f-7c25-4177-86dc-33149e07d4fd" target="_blank" rel="noopener" class="cert-card reveal" style="transition-delay: 0.4s;">
-        <div class="cert-icon">
-          <svg width="20" height="20" fill="none" stroke="var(--coral)" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="10" r="8"/><path d="M7 10l2 2 4-4"/></svg>
-        </div>
-        <div class="cert-info">
-          <span class="cert-name">AI Fundamentals</span>
-          <span class="cert-source">Credly</span>
-        </div>
-        <svg class="cert-arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 4l4 4-4 4"/></svg>
-      </a>
-      <a href="https://www.credly.com/badges/0dc8cea4-a791-4ebc-887c-252b5672def1/linked_in_profile" target="_blank" rel="noopener" class="cert-card reveal" style="transition-delay: 0.45s;">
-        <div class="cert-icon">
-          <svg width="20" height="20" fill="none" stroke="var(--coral)" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="10" r="8"/><path d="M7 10l2 2 4-4"/></svg>
-        </div>
-        <div class="cert-info">
-          <span class="cert-name">Data Fundamentals</span>
-          <span class="cert-source">Credly</span>
-        </div>
-        <svg class="cert-arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 4l4 4-4 4"/></svg>
-      </a>
     </div>
   </div>
 </section>
@@ -956,48 +804,11 @@ footer {
   <div class="container">
     <div class="reveal">
       <span class="section-label">04 Projects</span>
-      <h2 class="section-title">Things I've built.</h2>
+      <h2 class="section-title">Things I've built</h2>
     </div>
-    <div class="project-item reveal" style="transition-delay: 0.1s;">
-      <div class="project-screenshot">
-        <img src="images/tonetracker.png" alt="ToneTracker screenshot">
-      </div>
-      <div class="project-details">
-        <h3 class="project-title">ToneTracker.</h3>
-        <p class="project-desc">A user-friendly web application built with Streamlit and Python that analyzes the sentiment of any given text (like a message, tweet, or review) and classifies it as positive or negative. This project uses a Naive Bayes classifier trained on the popular Sentiment140 dataset, which contains 1.6 million tweets.</p>
-        <a href="https://sentiment-frontend-7x2szjgjcndbxvn6byefkk.streamlit.app" target="_blank" rel="noopener" class="project-link">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 3H3v10h10V9"/><path d="M9 1h4v4"/><path d="M13 1L6 8"/></svg>
-          sentiment-frontend-7x2szjgjcndbxvn6byefkk.streamlit.app
-        </a>
-      </div>
-    </div>
-
-    <div class="project-item project-item--reverse reveal" style="transition-delay: 0.2s;">
-      <div class="project-details">
-        <h3 class="project-title">Travel Budget Planner.</h3>
-        <p class="project-desc">Plan smarter, travel better! The Travel Budget Planner is a simple yet powerful Streamlit web app designed to help you estimate the total cost of your next trip and compare it to your available budget.</p>
-        <a href="https://travel-expense-tracker-8v34b9qtgvd3fxcrhjarqt.streamlit.app" target="_blank" rel="noopener" class="project-link">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 3H3v10h10V9"/><path d="M9 1h4v4"/><path d="M13 1L6 8"/></svg>
-          travel-expense-tracker-8v34b9qtgvd3fxcrhjarqt.streamlit.app
-        </a>
-      </div>
-      <div class="project-screenshot">
-        <img src="images/travelbudget.png" alt="Travel Budget Planner screenshot">
-      </div>
-    </div>
-
-    <div class="project-item reveal" style="transition-delay: 0.3s;">
-      <div class="project-screenshot">
-        <img src="images/nlp_playground.png" alt="NLP Playground screenshot">
-      </div>
-      <div class="project-details">
-        <h3 class="project-title">NLP Playground.</h3>
-        <p class="project-desc">A comprehensive web application for exploring Natural Language Processing concepts through interactive demos and real-time text analysis.</p>
-        <a href="https://nlp-playground-fefhzxy59yzgkfpdt5co23.streamlit.app" target="_blank" rel="noopener" class="project-link">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 3H3v10h10V9"/><path d="M9 1h4v4"/><path d="M13 1L6 8"/></svg>
-          nlp-playground-fefhzxy59yzgkfpdt5co23.streamlit.app
-        </a>
-      </div>
+    <div class="projects-placeholder reveal" style="transition-delay: 0.1s;">
+      <svg width="48" height="48" fill="none" stroke="#999" stroke-width="1.5" stroke-linecap="round"><rect x="4" y="4" width="40" height="40" rx="8"/><path d="M16 20l4 4 8-8"/></svg>
+      <p>Projects coming soon — Check back later to see my Streamlit applications and GitHub projects.</p>
     </div>
   </div>
 </section>
@@ -1009,7 +820,7 @@ footer {
   <div class="container">
     <div class="reveal">
       <span class="section-label">05 Get in Touch</span>
-      <h2 class="section-title">Let's connect :)</h2>
+      <h2 class="section-title">Let's connect</h2>
     </div>
     <div class="contact-grid">
       <div class="contact-left reveal" style="transition-delay: 0.1s;">
@@ -1017,21 +828,21 @@ footer {
           <svg viewBox="0 0 240 180" fill="none" xmlns="http://www.w3.org/2000/svg">
             <!-- Envelope body -->
             <rect x="30" y="50" width="180" height="110" rx="12" fill="#1a1a1a" opacity="0.08"/>
-            <rect x="34" y="54" width="172" height="102" rx="10" fill="#fff" stroke="#708090" stroke-width="2"/>
+            <rect x="34" y="54" width="172" height="102" rx="10" fill="#fff" stroke="#d17a5c" stroke-width="2"/>
             <!-- Envelope flap -->
-            <path d="M34,54 L120,115 L206,54" stroke="#708090" stroke-width="2" fill="none"/>
+            <path d="M34,54 L120,115 L206,54" stroke="#d17a5c" stroke-width="2" fill="none"/>
             <!-- Paper planes -->
             <g class="paper-plane">
-              <path d="M160,40 L180,30 L170,50 L165,42Z" fill="#708090" opacity="0.7"/>
-              <line x1="170" y1="50" x2="160" y2="60" stroke="#708090" stroke-width="1" opacity="0.4"/>
+              <path d="M160,40 L180,30 L170,50 L165,42Z" fill="#d17a5c" opacity="0.7"/>
+              <line x1="170" y1="50" x2="160" y2="60" stroke="#d17a5c" stroke-width="1" opacity="0.4"/>
             </g>
             <g class="paper-plane" style="animation-delay:2s;">
-              <path d="M60,35 L80,25 L70,45 L65,37Z" fill="#8a9bab" opacity="0.6"/>
-              <line x1="70" y1="45" x2="60" y2="55" stroke="#8a9bab" stroke-width="1" opacity="0.3"/>
+              <path d="M60,35 L80,25 L70,45 L65,37Z" fill="#e89b7e" opacity="0.6"/>
+              <line x1="70" y1="45" x2="60" y2="55" stroke="#e89b7e" stroke-width="1" opacity="0.3"/>
             </g>
             <!-- Decorative dots -->
-            <circle cx="40" cy="140" r="3" fill="#708090" opacity="0.3"/>
-            <circle cx="200" cy="130" r="2" fill="#8a9bab" opacity="0.3"/>
+            <circle cx="40" cy="140" r="3" fill="#d17a5c" opacity="0.3"/>
+            <circle cx="200" cy="130" r="2" fill="#e89b7e" opacity="0.3"/>
           </svg>
         </div>
         <h3>Let's work together</h3>
@@ -1148,55 +959,28 @@ function sendEmail() {
     canvas.width = W * dpr; canvas.height = H * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     cx = W / 2; cy = H / 2;
-    radius = Math.min(W, H) * 0.38;
+    radius = Math.min(W, H) * 0.34;
   }
   resize();
   window.addEventListener('resize', resize);
 
-  // All skill keywords
-  const skills = [
-    'Python', 'Java', 'C++', 'JavaScript', 'React.js', 'BASH', 'HTML', 'CSS',
-    'SQL', 'NoSQL', 'REST APIs', 'RDBMS', 'Milvus', 'Tableau', 'ETL',
-    'Vector DB', 'Tokenization', 'CRM', 'Git', 'GitHub', 'Jupyter',
-    'Colab', 'VSCode', 'Linux', 'LXC', 'Streamlit', 'Reflex',
-    'TensorFlow', 'Huggingface', 'OpenAI', 'LangChain', 'vLLM', 'Ollama',
-    'LlamaIndex', 'NLP', 'Embeddings', 'Prompt Eng.', 'n8n', 'Zapier',
-    'Langflow', 'NER', 'Sentiment', 'TF-IDF', 'Random Forest', 'SVM',
-    'Logistic Reg.', 'Supervised ML', 'Classification', 'Figma', 'UX/UI',
-    'Prototyping', 'Excel'
-  ];
-
-  // Distribute skill labels on sphere using fibonacci
+  // Generate points on sphere using fibonacci sphere
+  const PARTICLE_COUNT = 900;
+  const particles = [];
   const goldenAngle = Math.PI * (3 - Math.sqrt(5));
-  const tags = [];
 
-  for (let i = 0; i < skills.length; i++) {
-    const y = 1 - (i / (skills.length - 1)) * 2;
+  for (let i = 0; i < PARTICLE_COUNT; i++) {
+    const y = 1 - (i / (PARTICLE_COUNT - 1)) * 2;
     const radiusAtY = Math.sqrt(1 - y * y);
     const theta = goldenAngle * i;
 
-    tags.push({
-      label: skills[i],
+    particles.push({
       ox: Math.cos(theta) * radiusAtY,
       oy: y,
       oz: Math.sin(theta) * radiusAtY,
-      px: 0, py: 0, z: 0, alpha: 0, scale: 0,
-    });
-  }
-
-  // Filler particles to fill in the sphere shape
-  const FILLER_COUNT = 500;
-  const fillers = [];
-  for (let i = 0; i < FILLER_COUNT; i++) {
-    const y = 1 - (i / (FILLER_COUNT - 1)) * 2;
-    const radiusAtY = Math.sqrt(1 - y * y);
-    const theta = goldenAngle * i * 1.618;
-
-    fillers.push({
-      ox: Math.cos(theta) * radiusAtY,
-      oy: y,
-      oz: Math.sin(theta) * radiusAtY,
-      px: 0, py: 0, z: 0, alpha: 0, size: 0,
+      x: 0, y: 0, z: 0,
+      size: 0,
+      alpha: 0,
     });
   }
 
@@ -1213,85 +997,89 @@ function sendEmail() {
   let rotX = 0;
   let time = 0;
 
-  const fontFamily = '"SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-
-  function project(ox, oy, oz, breathe, cosY, sinY, cosX, sinX) {
-    let x = ox * breathe, y = oy * breathe, z = oz * breathe;
-    const x1 = x * cosY - z * sinY;
-    const z1 = x * sinY + z * cosY;
-    const y1 = y * cosX - z1 * sinX;
-    const z2 = y * sinX + z1 * cosX;
-    const perspective = 2.2;
-    const s = perspective / (perspective + z2);
-    return {
-      px: cx + x1 * radius * s,
-      py: cy + y1 * radius * s,
-      z: z2, scale: s,
-      alpha: (0.08 + 0.92 * ((z2 + 1) / 2)) * s,
-    };
-  }
-
   function animate() {
-    time += 0.003;
+    time += 0.004;
     ctx.clearRect(0, 0, W, H);
 
-    rotY += 0.005 + mouseX * 0.003;
-    rotX += (-0.1 - mouseY * 0.25 - rotX) * 0.02;
+    // Gentle auto-rotation + mouse influence
+    rotY += 0.006 + mouseX * 0.003;
+    rotX += (-0.15 - mouseY * 0.3 - rotX) * 0.02;
 
     const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
     const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
-    const breathe = 1 + Math.sin(time * 1.5) * 0.012;
 
-    // Project fillers
-    for (let i = 0; i < FILLER_COUNT; i++) {
-      const f = fillers[i];
-      const p = project(f.ox, f.oy, f.oz, breathe, cosY, sinY, cosX, sinX);
-      f.px = p.px; f.py = p.py; f.z = p.z;
-      f.alpha = p.alpha; f.size = Math.max(0.3, 1.1 * p.scale);
+    // Transform & sort by depth
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const p = particles[i];
+
+      // Slight breathing effect
+      const breathe = 1 + Math.sin(time * 2 + i * 0.005) * 0.02;
+      let x = p.ox * breathe;
+      let y = p.oy * breathe;
+      let z = p.oz * breathe;
+
+      // Rotate Y
+      const x1 = x * cosY - z * sinY;
+      const z1 = x * sinY + z * cosY;
+
+      // Rotate X
+      const y1 = y * cosX - z1 * sinX;
+      const z2 = y * sinX + z1 * cosX;
+
+      p.x = x1;
+      p.y = y1;
+      p.z = z2;
+
+      // Perspective
+      const perspective = 1.8;
+      const scale = perspective / (perspective + z2);
+      p.px = cx + x1 * radius * scale;
+      p.py = cy + y1 * radius * scale;
+      p.size = Math.max(0.3, 1.2 * scale);
+      p.alpha = (0.15 + 0.85 * ((z2 + 1) / 2)) * scale;
     }
 
-    // Project tags
-    for (let i = 0; i < tags.length; i++) {
-      const t = tags[i];
-      const p = project(t.ox, t.oy, t.oz, breathe, cosY, sinY, cosX, sinX);
-      t.px = p.px; t.py = p.py; t.z = p.z;
-      t.alpha = p.alpha; t.scale = p.scale;
-    }
+    // Sort back-to-front
+    particles.sort((a, b) => a.z - b.z);
 
-    // Combine and sort by depth
-    const all = [];
-    for (let i = 0; i < FILLER_COUNT; i++) all.push({ type: 'dot', ref: fillers[i], z: fillers[i].z });
-    for (let i = 0; i < tags.length; i++) all.push({ type: 'tag', ref: tags[i], z: tags[i].z });
-    all.sort((a, b) => a.z - b.z);
-
-    // Draw
-    for (let i = 0; i < all.length; i++) {
-      const item = all[i];
-      if (item.type === 'dot') {
-        const f = item.ref;
-        ctx.beginPath();
-        ctx.arc(f.px, f.py, f.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(112,128,144,${f.alpha * 0.45})`;
-        ctx.fill();
-      } else {
-        const t = item.ref;
-        const fontSize = Math.max(6, Math.round(10 * t.scale));
-        ctx.font = `italic 700 ${fontSize}px ${fontFamily}`;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-
-        // Coral color with depth-based alpha
-        ctx.fillStyle = `rgba(112,128,144,${t.alpha})`;
-        ctx.fillText(t.label, t.px, t.py);
+    // Draw connections between nearby particles (only front-facing)
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const a = particles[i];
+      if (a.z < -0.2) continue;
+      for (let j = i + 1; j < PARTICLE_COUNT; j++) {
+        const b = particles[j];
+        if (b.z < -0.2) continue;
+        const dx = a.px - b.px;
+        const dy = a.py - b.py;
+        const dist = dx * dx + dy * dy;
+        if (dist < 900) {
+          const lineAlpha = (1 - dist / 900) * 0.12 * Math.min(a.alpha, b.alpha);
+          ctx.beginPath();
+          ctx.moveTo(a.px, a.py);
+          ctx.lineTo(b.px, b.py);
+          ctx.strokeStyle = `rgba(209,122,92,${lineAlpha})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
       }
     }
 
-    // Subtle center glow
-    const glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius * 0.5);
-    glow.addColorStop(0, 'rgba(112,128,144,0.03)');
-    glow.addColorStop(1, 'rgba(112,128,144,0)');
+    // Draw particles
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const p = particles[i];
+
+      ctx.beginPath();
+      ctx.arc(p.px, p.py, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(209,122,92,${p.alpha})`;
+      ctx.fill();
+    }
+
+    // Subtle glow in center
+    const glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius * 0.6);
+    glow.addColorStop(0, 'rgba(209,122,92,0.04)');
+    glow.addColorStop(1, 'rgba(209,122,92,0)');
     ctx.beginPath();
-    ctx.arc(cx, cy, radius * 0.5, 0, Math.PI * 2);
+    ctx.arc(cx, cy, radius * 0.6, 0, Math.PI * 2);
     ctx.fillStyle = glow;
     ctx.fill();
 
