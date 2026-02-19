@@ -207,6 +207,176 @@ section { padding: 100px 32px; }
   opacity: 0; animation: fadeUp 0.6s ease 0.5s forwards;
 }
 
+/* Chat bar in hero */
+.chat-bar-wrapper {
+  max-width: 480px; width: 100%;
+  opacity: 0; animation: fadeUp 0.6s ease 0.55s forwards;
+}
+
+.chat-bar {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 6px 6px 6px 18px;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.chat-bar:focus-within {
+  border-color: var(--coral);
+  box-shadow: 0 0 0 3px rgba(112, 128, 144, 0.12);
+}
+
+.chat-bar input {
+  flex: 1; border: none; outline: none; background: transparent;
+  font-family: inherit; font-size: 14px; color: var(--text-primary);
+  min-width: 0;
+}
+.chat-bar input::placeholder { color: var(--text-tertiary); }
+
+.chat-bar-send {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--coral); color: #fff; border: none;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: background var(--transition), transform var(--transition);
+}
+.chat-bar-send:hover { background: #5a6a7a; transform: scale(1.05); }
+
+.chat-bar-hint {
+  font-size: 12px; color: var(--text-tertiary); margin-top: 8px;
+  padding-left: 4px;
+}
+
+/* Chat container */
+#chat-container {
+  position: fixed; bottom: 24px; right: 24px;
+  width: 400px; max-height: 520px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+  display: none; flex-direction: column;
+  z-index: 9998;
+  transform: translateY(20px) scale(0.95);
+  opacity: 0;
+}
+#chat-container.open {
+  display: flex;
+  animation: chatOpen 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+#chat-container.closing {
+  animation: chatClose 0.25s ease forwards;
+}
+
+@keyframes chatOpen {
+  from { transform: translateY(20px) scale(0.95); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+@keyframes chatClose {
+  from { transform: translateY(0) scale(1); opacity: 1; }
+  to { transform: translateY(20px) scale(0.95); opacity: 0; }
+}
+
+.chat-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  flex-shrink: 0;
+}
+.chat-header-dot {
+  width: 8px; height: 8px; background: #22c55e;
+  border-radius: 50%; flex-shrink: 0;
+}
+.chat-header-title {
+  font-size: 14px; font-weight: 600; color: var(--text-primary);
+  flex: 1;
+}
+.chat-close {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: transparent; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-tertiary);
+  transition: background var(--transition), color var(--transition);
+}
+.chat-close:hover { background: var(--bg-tertiary); color: var(--text-primary); }
+
+.chat-messages {
+  flex: 1; overflow-y: auto; padding: 16px 18px;
+  display: flex; flex-direction: column; gap: 12px;
+  min-height: 200px; max-height: 340px;
+}
+.chat-messages::-webkit-scrollbar { width: 4px; }
+.chat-messages::-webkit-scrollbar-track { background: transparent; }
+.chat-messages::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 2px; }
+
+.chat-msg {
+  max-width: 85%; padding: 10px 14px;
+  border-radius: 14px; font-size: 13.5px; line-height: 1.55;
+  animation: msgFadeUp 0.3s ease forwards;
+  word-wrap: break-word;
+}
+@keyframes msgFadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.chat-msg.user {
+  align-self: flex-end;
+  background: var(--coral); color: #fff;
+  border-bottom-right-radius: 4px;
+}
+.chat-msg.ai {
+  align-self: flex-start;
+  background: var(--bg-tertiary); color: var(--text-primary);
+  border-bottom-left-radius: 4px;
+}
+
+.chat-typing {
+  align-self: flex-start;
+  display: flex; gap: 4px; padding: 12px 16px;
+  background: var(--bg-tertiary); border-radius: 14px;
+}
+.chat-typing span {
+  width: 6px; height: 6px; background: var(--text-tertiary);
+  border-radius: 50%; animation: typingBounce 1.4s ease-in-out infinite;
+}
+.chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+.chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-6px); }
+}
+
+.chat-input-bar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px 14px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  flex-shrink: 0;
+}
+.chat-input-bar input {
+  flex: 1; border: none; outline: none; background: transparent;
+  font-family: inherit; font-size: 13.5px; color: var(--text-primary);
+  min-width: 0;
+}
+.chat-input-bar input::placeholder { color: var(--text-tertiary); }
+.chat-input-send {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: var(--coral); color: #fff; border: none;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: background var(--transition);
+}
+.chat-input-send:hover { background: #5a6a7a; }
+
+@media (max-width: 768px) {
+  .chat-bar-wrapper { max-width: 100%; }
+  #chat-container {
+    width: calc(100% - 24px); right: 12px; bottom: 12px;
+    max-height: 70vh;
+  }
+}
+
 .hero-ctas {
   display: flex; gap: 14px; flex-wrap: wrap;
   opacity: 0; animation: fadeUp 0.6s ease 0.6s forwards;
@@ -695,6 +865,36 @@ footer {
         </div>
         <p class="hero-role">AI Software Engineer</p>
         <p class="hero-summary">AI Engineer and Systems Analyst specializing in intelligent automation, enterprise AI solutions, and system reliability.</p>
+
+        <!-- AI Chat Bar -->
+        <div class="chat-bar-wrapper">
+          <div class="chat-bar">
+            <input type="text" id="hero-chat-input" placeholder="Ask AI about Saif..." autocomplete="off">
+            <button class="chat-bar-send" id="hero-chat-send" aria-label="Send">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 8h12M8 2l6 6-6 6"/></svg>
+            </button>
+          </div>
+          <p class="chat-bar-hint">Try: What are Saif's skills?</p>
+        </div>
+
+        <!-- Chat Container (fixed position, hidden by default) -->
+        <div id="chat-container">
+          <div class="chat-header">
+            <span class="chat-header-dot"></span>
+            <span class="chat-header-title">Saif's AI Assistant</span>
+            <button class="chat-close" id="chat-close" aria-label="Close chat">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 2l10 10M12 2L2 12"/></svg>
+            </button>
+          </div>
+          <div class="chat-messages" id="chat-messages"></div>
+          <div class="chat-input-bar">
+            <input type="text" id="chat-follow-input" placeholder="Ask a follow-up..." autocomplete="off">
+            <button class="chat-input-send" id="chat-follow-send" aria-label="Send">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 7h10M7 2l5 5-5 5"/></svg>
+            </button>
+          </div>
+        </div>
+
         <div class="hero-ctas">
           <a href="#contact" class="btn btn-coral">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 4l6 4 6-4"/><rect x="1" y="3" width="14" height="10" rx="2"/></svg>
@@ -1299,6 +1499,159 @@ function sendEmail() {
   }
 
   animate();
+})();
+
+// ============================================================
+// AI CHATBOT
+// ============================================================
+(function() {
+  const WORKER_URL = 'https://portfolio-chat.saif-ahmed.workers.dev';
+  const chatContainer = document.getElementById('chat-container');
+  const chatMessages = document.getElementById('chat-messages');
+  const heroInput = document.getElementById('hero-chat-input');
+  const heroSend = document.getElementById('hero-chat-send');
+  const followInput = document.getElementById('chat-follow-input');
+  const followSend = document.getElementById('chat-follow-send');
+  const closeBtn = document.getElementById('chat-close');
+
+  let conversationHistory = [];
+  let isStreaming = false;
+
+  function openChat() {
+    chatContainer.classList.remove('closing');
+    chatContainer.classList.add('open');
+  }
+
+  function closeChat() {
+    chatContainer.classList.add('closing');
+    chatContainer.addEventListener('animationend', function handler() {
+      chatContainer.classList.remove('open', 'closing');
+      chatContainer.removeEventListener('animationend', handler);
+    });
+  }
+
+  function addMessage(text, role) {
+    const div = document.createElement('div');
+    div.className = `chat-msg ${role}`;
+    div.textContent = text;
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    return div;
+  }
+
+  function showTyping() {
+    const div = document.createElement('div');
+    div.className = 'chat-typing';
+    div.id = 'typing-indicator';
+    div.innerHTML = '<span></span><span></span><span></span>';
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function hideTyping() {
+    const el = document.getElementById('typing-indicator');
+    if (el) el.remove();
+  }
+
+  async function sendMessage(text) {
+    if (!text.trim() || isStreaming) return;
+    isStreaming = true;
+
+    openChat();
+    addMessage(text, 'user');
+    conversationHistory.push({ role: 'user', content: text });
+
+    // Keep conversation history to last 10
+    if (conversationHistory.length > 10) {
+      conversationHistory = conversationHistory.slice(-10);
+    }
+
+    showTyping();
+
+    try {
+      const response = await fetch(WORKER_URL + '/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: conversationHistory }),
+      });
+
+      if (!response.ok) {
+        const err = await response.json().catch(() => ({}));
+        throw new Error(err.error || 'Request failed');
+      }
+
+      hideTyping();
+      const aiDiv = addMessage('', 'ai');
+      let fullResponse = '';
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop() || '';
+
+        for (const line of lines) {
+          const trimmed = line.trim();
+          if (!trimmed || !trimmed.startsWith('data: ')) continue;
+          const data = trimmed.slice(6);
+          if (data === '[DONE]') continue;
+          try {
+            const parsed = JSON.parse(data);
+            if (parsed.token) {
+              fullResponse += parsed.token;
+              aiDiv.textContent = fullResponse;
+              chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            if (parsed.error) throw new Error(parsed.error);
+          } catch (e) {
+            if (e.message === 'Stream interrupted') throw e;
+          }
+        }
+      }
+
+      if (fullResponse) {
+        conversationHistory.push({ role: 'assistant', content: fullResponse });
+      }
+    } catch (err) {
+      hideTyping();
+      addMessage(
+        'Sorry, I\'m unavailable right now. Feel free to reach Saif directly at saifanis03@gmail.com',
+        'ai'
+      );
+    } finally {
+      isStreaming = false;
+    }
+  }
+
+  function handleHeroSend() {
+    const text = heroInput.value.trim();
+    if (text) {
+      sendMessage(text);
+      heroInput.value = '';
+    }
+  }
+
+  function handleFollowSend() {
+    const text = followInput.value.trim();
+    if (text) {
+      sendMessage(text);
+      followInput.value = '';
+    }
+  }
+
+  heroSend.addEventListener('click', handleHeroSend);
+  heroInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') handleHeroSend(); });
+
+  followSend.addEventListener('click', handleFollowSend);
+  followInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') handleFollowSend(); });
+
+  closeBtn.addEventListener('click', closeChat);
 })();
 </script>
 </body>

@@ -1,0 +1,13 @@
+name = "portfolio-chat"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+ALLOWED_ORIGIN = "*"
+
+[[kv_namespaces]]
+binding = "RATE_LIMIT"
+id = "5b6a9977223f48208a2d9c7bbb730e2d"
+
+[ai]
+binding = "AI"
