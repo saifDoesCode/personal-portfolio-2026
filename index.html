@@ -19,9 +19,9 @@
   --text-tertiary: #999999;
   --accent: #2563eb;
   --accent-hover: #1d4ed8;
-  --coral: #708090;
-  --coral-light: #8a9bab;
-  --coral-bg: rgba(112, 128, 144, 0.08);
+  --coral: #4f6d7a;
+  --coral-light: #6e8d9a;
+  --coral-bg: rgba(79, 109, 122, 0.08);
   --dark: #1a1a1a;
   --border: #e5e5e7;
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
@@ -223,7 +223,7 @@ section { padding: 100px 32px; }
 }
 .chat-bar:focus-within {
   border-color: var(--coral);
-  box-shadow: 0 0 0 3px rgba(112, 128, 144, 0.12);
+  box-shadow: 0 0 0 3px rgba(79, 109, 122, 0.12);
 }
 
 .chat-bar input {
@@ -402,9 +402,9 @@ section { padding: 100px 32px; }
 .btn-primary:hover { background: var(--accent-hover); box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3); }
 .btn-coral {
   background: var(--coral); color: #fff;
-  box-shadow: 0 2px 8px rgba(209, 122, 92, 0.3);
+  box-shadow: 0 2px 8px rgba(79, 109, 122, 0.3);
 }
-.btn-coral:hover { background: #5a6a7a; box-shadow: 0 6px 20px rgba(112, 128, 144, 0.35); }
+.btn-coral:hover { background: #3c5560; box-shadow: 0 6px 20px rgba(79, 109, 122, 0.35); }
 .btn-secondary {
   background: var(--bg-tertiary); color: var(--text-primary);
   border: 1px solid var(--border);
@@ -991,32 +991,7 @@ footer {
         <p style="color: var(--text-secondary); max-width: 420px;">A blend of programming, machine learning, DevOps, and design skills refined through real-world projects.</p>
       </div>
       <div class="skills-illustration">
-        <svg viewBox="0 0 360 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Data flow lines -->
-          <path d="M40,140 Q100,80 180,140 T320,140" stroke="#708090" stroke-width="2" opacity="0.4" class="draw-path"/>
-          <path d="M40,160 Q120,220 180,160 T320,160" stroke="#1a1a1a" stroke-width="1.5" opacity="0.3" class="draw-path" style="animation-delay:0.3s"/>
-          <path d="M60,100 L140,140 L220,110 L300,150" stroke="#8a9bab" stroke-width="1.5" opacity="0.35" class="draw-path" style="animation-delay:0.6s"/>
-
-          <!-- Nodes -->
-          <circle class="node-dot" cx="40" cy="140" r="6" fill="#708090"/>
-          <circle class="node-dot" cx="120" cy="110" r="6" fill="#1a1a1a" style="animation-delay:0.5s"/>
-          <circle class="node-dot" cx="180" cy="140" r="7" fill="#708090" style="animation-delay:1s"/>
-          <circle class="node-dot" cx="240" cy="120" r="5" fill="#8a9bab" style="animation-delay:1.5s"/>
-          <circle class="node-dot" cx="320" cy="140" r="6" fill="#1a1a1a" style="animation-delay:2s"/>
-
-          <!-- Secondary nodes -->
-          <circle class="node-dot" cx="80" cy="180" r="4" fill="#8a9bab" style="animation-delay:0.8s"/>
-          <circle class="node-dot" cx="200" cy="190" r="5" fill="#708090" style="animation-delay:1.2s"/>
-          <circle class="node-dot" cx="280" cy="170" r="4" fill="#1a1a1a" style="animation-delay:1.8s"/>
-
-          <!-- Connector lines between nodes -->
-          <line x1="40" y1="140" x2="120" y2="110" stroke="#708090" stroke-width="1" opacity="0.2"/>
-          <line x1="120" y1="110" x2="180" y2="140" stroke="#1a1a1a" stroke-width="1" opacity="0.2"/>
-          <line x1="180" y1="140" x2="240" y2="120" stroke="#8a9bab" stroke-width="1" opacity="0.2"/>
-          <line x1="240" y1="120" x2="320" y2="140" stroke="#708090" stroke-width="1" opacity="0.2"/>
-          <line x1="80" y1="180" x2="180" y2="140" stroke="#8a9bab" stroke-width="1" opacity="0.15"/>
-          <line x1="200" y1="190" x2="280" y2="170" stroke="#1a1a1a" stroke-width="1" opacity="0.15"/>
-        </svg>
+        <img src="images/molecule-art.png" alt="Molecule art" style="max-width: 100%; height: auto;">
       </div>
     </div>
 
@@ -1485,7 +1460,7 @@ function sendEmail() {
         const f = item.ref;
         ctx.beginPath();
         ctx.arc(f.px, f.py, f.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(112,128,144,${f.alpha * 0.45})`;
+        ctx.fillStyle = `rgba(79,109,122,${f.alpha * 0.45})`;
         ctx.fill();
       } else {
         const t = item.ref;
@@ -1495,15 +1470,15 @@ function sendEmail() {
         ctx.textBaseline = 'middle';
 
         // Coral color with depth-based alpha
-        ctx.fillStyle = `rgba(112,128,144,${t.alpha})`;
+        ctx.fillStyle = `rgba(79,109,122,${t.alpha})`;
         ctx.fillText(t.label, t.px, t.py);
       }
     }
 
     // Subtle center glow
     const glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius * 0.5);
-    glow.addColorStop(0, 'rgba(112,128,144,0.03)');
-    glow.addColorStop(1, 'rgba(112,128,144,0)');
+    glow.addColorStop(0, 'rgba(79,109,122,0.03)');
+    glow.addColorStop(1, 'rgba(79,109,122,0)');
     ctx.beginPath();
     ctx.arc(cx, cy, radius * 0.5, 0, Math.PI * 2);
     ctx.fillStyle = glow;
