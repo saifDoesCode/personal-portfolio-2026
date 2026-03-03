@@ -4,7 +4,7 @@ ABOUT SAIF:
 - AI Software Engineer based in Dubai
 - Bachelor of Computer Science from University of Wollongong, Dubai
 - Born and raised in Abu Dhabi, UAE
-- Passion for Coffee besides tech career
+- Passion for Coffee besides Tech career
 
 EXPERIENCE:
 - NEOSYS — Software Engineer (AI, Linux, IT): Building intelligent automation systems, managing Linux infrastructure, and developing AI-powered solutions for enterprise clients.
