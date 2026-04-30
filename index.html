@@ -13,7 +13,7 @@
 :root {
   --bg-primary: #ffffff;
   --bg-secondary: #fafafa;
-  --bg-tertiary: #f5f5f5;
+  --bg-tertiary: #ffffff;
   --text-primary: #1d1d1f;
   --text-secondary: #6e6e73;
   --text-tertiary: #999999;
@@ -123,18 +123,21 @@ section { padding: 100px 32px; }
 
 .container { max-width: 1200px; margin: 0 auto; }
 
-.section-label {
-  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 13px; font-weight: 600; letter-spacing: 0.06em;
-  text-transform: uppercase; color: var(--coral); font-style: italic;
-  margin-bottom: 12px; display: block;
+/* Section header: particle shape + title/subtitle */
+.section-header {
+  display: flex; align-items: center; justify-content: center; gap: 20px;
+  margin-bottom: 56px;
 }
-
-.section-title {
+.section-header canvas { flex-shrink: 0; display: block; }
+.section-header-text h2 {
   font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: clamp(28px, 4vw, 40px); font-weight: 700;
-  letter-spacing: -0.03em; color: var(--text-primary);
-  margin-bottom: 48px; line-height: 1.15;
+  font-size: 35px; font-weight: 700;
+  letter-spacing: -0.035em; line-height: 1.05;
+  color: var(--text-primary); margin: 0 0 4px;
+}
+.section-header-text p {
+  font-size: clamp(15px, 2vw, 19px); font-weight: 500;
+  color: var(--text-secondary); margin: 0;
 }
 
 /* reveal on scroll */
@@ -152,65 +155,40 @@ section { padding: 100px 32px; }
   padding-top: 80px; background: var(--bg-primary);
 }
 
-.hero-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 64px; align-items: center;
-}
-
-.hero-content { display: flex; flex-direction: column; gap: 24px; }
-
-.badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(37, 99, 235, 0.06); color: var(--accent);
-  padding: 6px 16px; border-radius: 100px;
-  font-size: 13px; font-weight: 600; width: fit-content;
-  border: 1px solid rgba(37, 99, 235, 0.12);
-  opacity: 0; animation: fadeUp 0.6s ease 0.2s forwards;
-}
-.badge-dot {
-  width: 7px; height: 7px; background: #22c55e;
-  border-radius: 50%; animation: pulse-dot 2s ease-in-out infinite;
-}
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.4); }
+.hero-content {
+  max-width: 580px;
+  display: flex; flex-direction: column; gap: 24px;
 }
 
 .hero-name-row {
   display: flex; align-items: center; gap: 20px;
-  opacity: 0; animation: fadeUp 0.6s ease 0.3s forwards;
+  opacity: 0; animation: fadeUp 0.6s ease 0.2s forwards;
 }
 
-.hero-avatar {
-  width: 72px; height: 72px; border-radius: 50%;
-  object-fit: contain; object-position: center;
-  flex-shrink: 0;
-}
+.hero-name-text { display: flex; flex-direction: column; }
 
 .hero-name {
   font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: clamp(42px, 6vw, 68px); font-weight: 700;
+  font-size: 35px; font-weight: 700;
   letter-spacing: -0.035em; line-height: 1.05;
   color: var(--text-primary);
 }
 
 .hero-role {
-  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: clamp(18px, 2.5vw, 24px); font-weight: 600;
-  letter-spacing: -0.02em; color: var(--coral); font-style: italic;
-  opacity: 0; animation: fadeUp 0.6s ease 0.4s forwards;
+  font-size: clamp(15px, 2vw, 19px); font-weight: 500;
+  color: var(--text-secondary); margin-top: 4px;
 }
 
 .hero-summary {
   font-size: 17px; color: var(--text-secondary);
   max-width: 480px; line-height: 1.7;
-  opacity: 0; animation: fadeUp 0.6s ease 0.5s forwards;
+  opacity: 0; animation: fadeUp 0.6s ease 0.4s forwards;
 }
 
 /* Chat bar in hero */
 .chat-bar-wrapper {
   max-width: 480px; width: 100%;
-  opacity: 0; animation: fadeUp 0.6s ease 0.55s forwards;
+  opacity: 0; animation: fadeUp 0.6s ease 0.5s forwards;
 }
 
 .chat-bar {
@@ -235,12 +213,12 @@ section { padding: 100px 32px; }
 
 .chat-bar-send {
   width: 36px; height: 36px; border-radius: 10px;
-  background: var(--coral); color: #fff; border: none;
+  background: #e76f51; color: #fff; border: none;
   cursor: pointer; display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
   transition: background var(--transition), transform var(--transition);
 }
-.chat-bar-send:hover { background: #5a6a7a; transform: scale(1.05); }
+.chat-bar-send:hover { background: #c85a3a; transform: scale(1.05); }
 
 .chat-bar-hint {
   font-size: 12px; color: var(--text-tertiary); margin-top: 8px;
@@ -362,12 +340,12 @@ section { padding: 100px 32px; }
 .chat-input-bar input::placeholder { color: var(--text-tertiary); }
 .chat-input-send {
   width: 32px; height: 32px; border-radius: 8px;
-  background: var(--coral); color: #fff; border: none;
+  background: #e76f51; color: #fff; border: none;
   cursor: pointer; display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
   transition: background var(--transition);
 }
-.chat-input-send:hover { background: #5a6a7a; }
+.chat-input-send:hover { background: #c85a3a; }
 
 @media (max-width: 768px) {
   .chat-bar-wrapper { max-width: 100%; }
@@ -411,53 +389,6 @@ section { padding: 100px 32px; }
 }
 .btn-secondary:hover { background: #eee; box-shadow: var(--shadow-md); }
 
-/* Hero illustration */
-.hero-illustration {
-  display: flex; justify-content: center; align-items: center;
-  opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
-}
-
-#particle-sphere {
-  width: 100%; max-width: 480px; height: auto;
-  aspect-ratio: 1;
-}
-
-/* SVG animations */
-@keyframes morph1 {
-  0%, 100% { d: path("M180,80 C220,40 320,60 340,120 C360,180 300,260 240,280 C180,300 100,260 80,200 C60,140 140,120 180,80Z"); }
-  50% { d: path("M200,60 C260,30 340,80 350,140 C360,200 280,280 220,290 C160,300 80,240 70,180 C60,120 140,90 200,60Z"); }
-}
-@keyframes morph2 {
-  0%, 100% { d: path("M300,120 C340,90 400,130 390,180 C380,230 330,270 280,260 C230,250 220,190 240,150 C260,110 280,130 300,120Z"); }
-  50% { d: path("M310,100 C350,80 410,140 400,190 C390,240 340,280 290,270 C240,260 210,200 230,160 C250,120 290,110 310,100Z"); }
-}
-@keyframes float-dot {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(0, -8px); }
-}
-@keyframes pulse-circle {
-  0%, 100% { r: 45; opacity: 0.18; }
-  50% { r: 52; opacity: 0.28; }
-}
-@keyframes draw-line {
-  from { stroke-dashoffset: 300; }
-  to { stroke-dashoffset: 0; }
-}
-@keyframes rotate-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.morph-shape1 { animation: morph1 8s ease-in-out infinite; }
-.morph-shape2 { animation: morph2 8s ease-in-out infinite 1s; }
-.pulse-ring { animation: pulse-circle 3s ease-in-out infinite; }
-.float-dot { animation: float-dot 5s ease-in-out infinite; }
-.draw-path {
-  stroke-dasharray: 300; stroke-dashoffset: 300;
-  animation: draw-line 3s ease forwards 0.8s;
-}
-.rotate-el { animation: rotate-slow 20s linear infinite; transform-origin: center; }
-
 /* ============================================================
    EXPERIENCE
    ============================================================ */
@@ -471,7 +402,7 @@ section { padding: 100px 32px; }
   background: var(--bg-primary); border-radius: var(--radius);
   padding: 32px; border: 1px solid var(--border);
   transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
-  display: flex; flex-direction: column; gap: 14px;
+  display: flex; flex-direction: column; gap: 16px;
 }
 .exp-card:hover {
   transform: translateY(-6px);
@@ -479,20 +410,17 @@ section { padding: 100px 32px; }
   border-color: var(--coral-light);
 }
 
-.exp-card-header {
-  display: flex; align-items: center; gap: 14px;
+.exp-card--wide {
+  grid-column: 1 / -1;
+  max-width: 560px;
+  margin: 0 auto;
+  width: 100%;
 }
 
-.exp-icon {
-  width: 44px; height: 44px; border-radius: 12px;
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 700; font-size: 16px; color: #fff;
-  flex-shrink: 0;
-}
-
-.exp-card-meta { display: flex; flex-direction: column; }
-.exp-company { font-weight: 700; font-size: 16px; color: var(--text-primary); letter-spacing: -0.01em; }
-.exp-role { font-size: 14px; color: var(--coral); font-weight: 600; font-style: italic; }
+.exp-card-meta { display: flex; flex-direction: column; gap: 3px; }
+.exp-company { font-weight: 700; font-size: 17px; color: var(--text-primary); letter-spacing: -0.01em; }
+.exp-role { font-size: 14px; color: var(--text-secondary); font-weight: 500; }
+.exp-location { font-size: 13px; color: var(--text-tertiary); margin-top: 1px; }
 
 .exp-desc { font-size: 14.5px; color: var(--text-secondary); line-height: 1.65; }
 
@@ -500,20 +428,6 @@ section { padding: 100px 32px; }
    SKILLS
    ============================================================ */
 #skills { background: var(--bg-primary); }
-
-.skills-top {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
-  align-items: center; margin-bottom: 56px;
-}
-.skills-top-text { max-width: 500px; }
-.skills-illustration { display: flex; justify-content: center; }
-.skills-illustration svg { max-width: 360px; width: 100%; height: auto; }
-
-@keyframes node-pulse {
-  0%, 100% { r: 6; opacity: 0.9; }
-  50% { r: 9; opacity: 1; }
-}
-.node-dot { animation: node-pulse 2.5s ease-in-out infinite; }
 
 .skills-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
@@ -555,40 +469,38 @@ section { padding: 100px 32px; }
 #education { background: var(--bg-secondary); }
 
 .edu-card {
-  background: var(--bg-primary); border-radius: var(--radius);
-  padding: 40px; border: 1px solid var(--border);
-  display: flex; align-items: center; gap: 28px;
-  max-width: 600px;
-  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  background: var(--bg-tertiary); border-radius: var(--radius);
+  padding: 48px 56px;
+  display: flex; align-items: center; gap: 32px;
+  max-width: 700px; margin: 0 auto;
+  transition: transform var(--transition), box-shadow var(--transition);
 }
 .edu-card:hover {
   transform: translateY(-6px); box-shadow: var(--shadow-lg);
-  border-color: var(--coral-light);
 }
 
-.edu-logo {
-  width: 68px; height: 68px; border-radius: 16px;
-  background: linear-gradient(135deg, var(--coral), var(--coral-light));
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
+.edu-circle {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: #e76f51; flex-shrink: 0;
 }
-.edu-logo svg { width: 36px; height: 36px; }
 
 .edu-info h3 {
   font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 20px; font-weight: 700; letter-spacing: -0.02em;
+  font-size: 22px; font-weight: 700; letter-spacing: -0.02em;
   color: var(--text-primary); margin-bottom: 4px;
 }
-.edu-info p { font-size: 15px; color: var(--text-secondary); font-weight: 500; }
+.edu-info p { font-size: 16px; color: var(--text-secondary); font-weight: 500; }
 
 .certs-heading {
   font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 22px; font-weight: 700; letter-spacing: -0.02em;
   color: var(--text-primary); margin-top: 48px; margin-bottom: 20px;
+  max-width: 700px; margin-left: auto; margin-right: auto;
 }
 
 .certs-grid {
   display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  max-width: 700px; margin: 0 auto;
 }
 
 .cert-card {
@@ -639,12 +551,8 @@ section { padding: 100px 32px; }
 }
 .project-item:last-child { margin-bottom: 0; }
 
-.project-item--reverse {
-  direction: rtl;
-}
-.project-item--reverse > * {
-  direction: ltr;
-}
+.project-item--reverse { direction: rtl; }
+.project-item--reverse > * { direction: ltr; }
 
 .project-screenshot {
   border-radius: var(--radius); overflow: hidden;
@@ -655,13 +563,9 @@ section { padding: 100px 32px; }
 .project-screenshot:hover {
   transform: translateY(-4px); box-shadow: var(--shadow-lg);
 }
-.project-screenshot img {
-  width: 100%; height: auto; display: block;
-}
+.project-screenshot img { width: 100%; height: auto; display: block; }
 
-.project-details {
-  display: flex; flex-direction: column; gap: 18px;
-}
+.project-details { display: flex; flex-direction: column; gap: 18px; }
 
 .project-title {
   font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -790,31 +694,21 @@ footer {
   .nav-links { display: none; }
   .mobile-toggle { display: block; }
 
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: 48px; text-align: center;
-  }
-  .hero-content { align-items: center; }
-  .hero-name-row { justify-content: center; }
-  .hero-avatar { width: 60px; height: 60px; }
-  .badge { margin: 0 auto; }
-  .hero-summary { margin: 0 auto; }
-  .hero-ctas { justify-content: center; }
-  .hero-illustration { order: -1; }
-  #particle-sphere { max-width: 300px; }
+  .hero-content { max-width: 100%; }
 
   .experience-grid { grid-template-columns: 1fr; }
-  .skills-top { grid-template-columns: 1fr; }
+  .exp-card--wide { max-width: 100%; }
   .skills-grid { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
   .project-item, .project-item--reverse { grid-template-columns: 1fr; direction: ltr; gap: 32px; }
   .project-item { margin-bottom: 56px; }
-  .edu-card { flex-direction: column; text-align: center; }
+  .edu-card { flex-direction: column; text-align: center; padding: 36px 32px; }
   .certs-grid { grid-template-columns: 1fr; }
+  .section-header { gap: 14px; }
 }
 
 @media (max-width: 480px) {
-  .hero-name { font-size: 36px; }
+  .hero-name { font-size: 35px; }
   .hero-ctas { flex-direction: column; align-items: stretch; }
   .btn { justify-content: center; }
   .exp-card { padding: 24px; }
@@ -857,59 +751,44 @@ footer {
      ============================================================ -->
 <section id="hero">
   <div class="container">
-    <div class="hero-grid">
-      <div class="hero-content">
-        <div class="hero-name-row">
-          <img src="images/profile.png" alt="Saif Ahmed" class="hero-avatar">
+    <div class="hero-content">
+      <div class="hero-name-row">
+        <canvas id="hero-cone" width="90" height="90"></canvas>
+        <div class="hero-name-text">
           <h1 class="hero-name">Saif Ahmed.</h1>
-        </div>
-        <p class="hero-role">AI Software Engineer</p>
-        <p class="hero-summary">AI Engineer and Systems Analyst specializing in intelligent automation, enterprise AI solutions, and system reliability.</p>
-
-        <!-- AI Chat Bar -->
-        <div class="chat-bar-wrapper">
-          <div class="chat-bar">
-            <input type="text" id="hero-chat-input" placeholder="Ask AI about Saif..." autocomplete="off">
-            <button class="chat-bar-send" id="hero-chat-send" aria-label="Send">
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 8h12M8 2l6 6-6 6"/></svg>
-            </button>
-          </div>
-          <p class="chat-bar-hint">Try: What are Saif's skills?</p>
-        </div>
-
-        <!-- Chat Container (fixed position, hidden by default) -->
-        <div id="chat-container">
-          <div class="chat-header">
-            <span class="chat-header-dot"></span>
-            <span class="chat-header-title">Saif's AI Assistant</span>
-            <button class="chat-close" id="chat-close" aria-label="Close chat">
-              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 2l10 10M12 2L2 12"/></svg>
-            </button>
-          </div>
-          <div class="chat-messages" id="chat-messages"></div>
-          <div class="chat-input-bar">
-            <input type="text" id="chat-follow-input" placeholder="Ask a follow-up..." autocomplete="off">
-            <button class="chat-input-send" id="chat-follow-send" aria-label="Send">
-              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 7h10M7 2l5 5-5 5"/></svg>
-            </button>
-          </div>
-        </div>
-
-        <div class="hero-ctas">
-          <a href="#contact" class="btn btn-coral">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 4l6 4 6-4"/><rect x="1" y="3" width="14" height="10" rx="2"/></svg>
-            Get in touch
-          </a>
-          <a href="#experience" class="btn btn-secondary">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 8h14M8 1l7 7-7 7"/></svg>
-            View work
-          </a>
+          <p class="hero-role">AI Software Engineer.</p>
         </div>
       </div>
+      <p class="hero-summary">AI engineer and software developer specializing in LLM applications, RAG pipelines, and agentic systems.</p>
+      <p class="hero-summary" style="animation-delay: 0.45s;">Experienced with Python, FastAPI, React, and modern AI frameworks, delivering production solutions across the UAE. Holds a Computer Science degree and a UAE Golden Visa.</p>
 
-      <!-- Hero Illustration -->
-      <div class="hero-illustration">
-        <canvas id="particle-sphere" width="480" height="480"></canvas>
+      <!-- AI Chat Bar -->
+      <div class="chat-bar-wrapper">
+        <div class="chat-bar">
+          <input type="text" id="hero-chat-input" placeholder="Ask AI about Saif.." autocomplete="off">
+          <button class="chat-bar-send" id="hero-chat-send" aria-label="Send">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 8h12M8 2l6 6-6 6"/></svg>
+          </button>
+        </div>
+        <p class="chat-bar-hint">Try: What are Saif's skills?</p>
+      </div>
+
+      <!-- Chat Container (fixed position) -->
+      <div id="chat-container">
+        <div class="chat-header">
+          <span class="chat-header-dot"></span>
+          <span class="chat-header-title">Saif's AI Assistant</span>
+          <button class="chat-close" id="chat-close" aria-label="Close chat">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 2l10 10M12 2L2 12"/></svg>
+          </button>
+        </div>
+        <div class="chat-messages" id="chat-messages"></div>
+        <div class="chat-input-bar">
+          <input type="text" id="chat-follow-input" placeholder="Ask a follow-up..." autocomplete="off">
+          <button class="chat-input-send" id="chat-follow-send" aria-label="Send">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 7h10M7 2l5 5-5 5"/></svg>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -920,60 +799,53 @@ footer {
      ============================================================ -->
 <section id="experience">
   <div class="container">
-    <div class="reveal">
-      <span class="section-label">01 Experience</span>
-      <h2 class="section-title">Where I've worked.</h2>
+    <div class="section-header reveal">
+      <canvas id="exp-pentagon" width="70" height="70"></canvas>
+      <div class="section-header-text">
+        <h2>Experience.</h2>
+        <p>Where I've worked.</p>
+      </div>
     </div>
     <div class="experience-grid">
       <div class="exp-card reveal" style="transition-delay: 0.1s;">
-        <div class="exp-card-header">
-          <div class="exp-icon" style="background: linear-gradient(135deg, #708090, #8a9bab);">N</div>
-          <div class="exp-card-meta">
-            <span class="exp-company">NEOSYS</span>
-            <span class="exp-role">Software Engineer (AI, Linux, IT)</span>
-          </div>
+        <div class="exp-card-meta">
+          <span class="exp-company">NEOSYS</span>
+          <span class="exp-role">Software Engineer (AI, Linux)</span>
+          <span class="exp-location">~ Dubai, UAE</span>
         </div>
-        <p class="exp-desc">Building intelligent automation systems, managing Linux infrastructure, and developing AI-powered solutions for enterprise clients.</p>
+        <p class="exp-desc">Led adoption of AI coding tools by benchmarking multiple solutions and delivering recommendations. Worked on UAE FTA e-invoicing compliance in a production ERP system, and improved infrastructure efficiency through automation and container management. Also contributed to a collaborative codebase, resolving architectural issues to enhance long-term maintainability.</p>
       </div>
       <div class="exp-card reveal" style="transition-delay: 0.2s;">
-        <div class="exp-card-header">
-          <div class="exp-icon" style="background: linear-gradient(135deg, #1a1a1a, #444);">A</div>
-          <div class="exp-card-meta">
-            <span class="exp-company">AHB.ai</span>
-            <span class="exp-role">AI Engineer</span>
-          </div>
+        <div class="exp-card-meta">
+          <span class="exp-company">AI Hathboor Bikal.ai</span>
+          <span class="exp-role">AI Engineer</span>
+          <span class="exp-location">~ Sharjah, UAE</span>
         </div>
-        <p class="exp-desc">Designing and deploying AI models and pipelines, working with LLMs, embeddings, and NLP systems for production environments.</p>
+        <p class="exp-desc">Architected and delivered a production conversational AI system integrating vLLM with a CRM, enabling natural language access to business data. Built a function-calling backend with semantic search, vector retrieval, and automated workflows, allowing reliable, end-to-end query handling without technical user input.</p>
       </div>
       <div class="exp-card reveal" style="transition-delay: 0.3s;">
-        <div class="exp-card-header">
-          <div class="exp-icon" style="background: linear-gradient(135deg, #2563eb, #60a5fa);">DP</div>
-          <div class="exp-card-meta">
-            <span class="exp-company">Dubai Police</span>
-            <span class="exp-role">Data Scientist</span>
-          </div>
+        <div class="exp-card-meta">
+          <span class="exp-company">Dubai Police</span>
+          <span class="exp-role">Software Developer</span>
+          <span class="exp-location">~ Dubai, UAE</span>
         </div>
-        <p class="exp-desc">Applied machine learning and data analytics to drive insights, improve operations, and support data-driven decision making.</p>
+        <p class="exp-desc">Built FalconWatch, a full-stack crime reporting platform developed with Dubai Police, featuring interactive maps, real-time geolocation and alerts, a MongoDB-backed data layer, and analytics dashboards for tracking crime trends. Powered by AI to classify crime reports.</p>
       </div>
       <div class="exp-card reveal" style="transition-delay: 0.4s;">
-        <div class="exp-card-header">
-          <div class="exp-icon" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);">JT</div>
-          <div class="exp-card-meta">
-            <span class="exp-company">Joe Trades</span>
-            <span class="exp-role">Frontend Developer</span>
-          </div>
+        <div class="exp-card-meta">
+          <span class="exp-company">Joe Trades</span>
+          <span class="exp-role">Frontend Developer</span>
+          <span class="exp-location">~ Dubai, UAE</span>
         </div>
-        <p class="exp-desc">Developed responsive web interfaces and interactive user experiences using modern frontend frameworks and design systems.</p>
+        <p class="exp-desc">Developed a responsive website with HTML, CSS, and JavaScript, adding dynamic UI features and enhancing functionality with jQuery and Select2, while improving stability through bug fixes.</p>
       </div>
-      <div class="exp-card reveal" style="transition-delay: 0.5s;">
-        <div class="exp-card-header">
-          <div class="exp-icon" style="background: linear-gradient(135deg, #10b981, #34d399);">AD</div>
-          <div class="exp-card-meta">
-            <span class="exp-company">ADIB</span>
-            <span class="exp-role">Digital Transformation Intern</span>
-          </div>
+      <div class="exp-card exp-card--wide reveal" style="transition-delay: 0.5s;">
+        <div class="exp-card-meta">
+          <span class="exp-company">Abu Dhabi Islamic Bank (ADIB)</span>
+          <span class="exp-role">Digital Transformation Intern</span>
+          <span class="exp-location">~ Abu Dhabi, UAE</span>
         </div>
-        <p class="exp-desc">Contributed to digital transformation initiatives, process automation, and technology modernization across business units.</p>
+        <p class="exp-desc">Gained experience in digital transformation, designing Figma prototypes for a banking app and learning Agile software development practices.</p>
       </div>
     </div>
   </div>
@@ -984,14 +856,11 @@ footer {
      ============================================================ -->
 <section id="skills">
   <div class="container">
-    <div class="skills-top reveal">
-      <div class="skills-top-text">
-        <span class="section-label">02 Skills & Technologies</span>
-        <h2 class="section-title" style="margin-bottom: 16px;">My toolkit.</h2>
-        <p style="color: var(--text-secondary); max-width: 420px;">A blend of programming, machine learning, DevOps, and design skills refined through real-world projects.</p>
-      </div>
-      <div class="skills-illustration">
-        <img src="images/molecule-art.png" alt="Molecule art" style="max-width: 100%; height: auto;">
+    <div class="section-header reveal">
+      <canvas id="skills-sphere" width="70" height="70"></canvas>
+      <div class="section-header-text">
+        <h2>Skills &amp; Technology.</h2>
+        <p>My Toolkit.</p>
       </div>
     </div>
 
@@ -1005,7 +874,7 @@ footer {
         </div>
       </div>
       <div class="skill-card reveal" style="transition-delay: 0.2s;">
-        <h3>Data & Infrastructure</h3>
+        <h3>Data &amp; Infrastructure</h3>
         <div class="skill-tags">
           <span class="skill-tag">SQL</span><span class="skill-tag">NoSQL</span><span class="skill-tag">REST APIs</span>
           <span class="skill-tag">RDBMS Design</span><span class="skill-tag">Milvus</span><span class="skill-tag">Tableau</span>
@@ -1014,7 +883,7 @@ footer {
         </div>
       </div>
       <div class="skill-card reveal" style="transition-delay: 0.3s;">
-        <h3>DevOps & Tools</h3>
+        <h3>DevOps &amp; Tools</h3>
         <div class="skill-tags">
           <span class="skill-tag">Git</span><span class="skill-tag">GitHub</span><span class="skill-tag">Jupyter</span>
           <span class="skill-tag">Google Colab</span><span class="skill-tag">VSCode</span><span class="skill-tag">Linux (Ubuntu)</span>
@@ -1040,7 +909,7 @@ footer {
         </div>
       </div>
       <div class="skill-card reveal" style="transition-delay: 0.6s;">
-        <h3>Design & Prototyping</h3>
+        <h3>Design &amp; Prototyping</h3>
         <div class="skill-tags">
           <span class="skill-tag">Figma</span><span class="skill-tag">UX/UI Design</span><span class="skill-tag">High-fidelity Prototyping</span>
         </div>
@@ -1054,21 +923,23 @@ footer {
      ============================================================ -->
 <section id="education">
   <div class="container">
-    <div class="reveal">
-      <span class="section-label">03 Education</span>
-      <h2 class="section-title">Academic background.</h2>
-    </div>
-    <div class="edu-card reveal" style="transition-delay: 0.1s;">
-      <div class="edu-logo">
-        <svg viewBox="0 0 36 36" fill="none"><path d="M18 4L4 12l14 8 14-8L18 4z" fill="#fff" opacity="0.9"/><path d="M8 15v8l10 6 10-6v-8L18 21 8 15z" fill="#fff" opacity="0.7"/><rect x="27" y="14" width="2" height="12" rx="1" fill="#fff" opacity="0.6"/></svg>
-      </div>
-      <div class="edu-info">
-        <h3>Bachelor of Computer Science</h3>
-        <p>University of Wollongong, Dubai</p>
+    <div class="section-header reveal">
+      <canvas id="edu-octagon" width="70" height="70"></canvas>
+      <div class="section-header-text">
+        <h2>Education.</h2>
+        <p>My Academic Background.</p>
       </div>
     </div>
 
-    <h3 class="certs-heading reveal" style="transition-delay: 0.2s;">Courses & Certifications</h3>
+    <div class="edu-card reveal" style="transition-delay: 0.1s;">
+      <div class="edu-circle"></div>
+      <div class="edu-info">
+        <h3>Bachelor of Computer Science.</h3>
+        <p>University of Wollongong.</p>
+      </div>
+    </div>
+
+    <h3 class="certs-heading reveal" style="transition-delay: 0.2s;">Courses &amp; Certifications</h3>
     <div class="certs-grid">
       <a href="https://www.datacamp.com/completed/statement-of-accomplishment/course/84ea41fea08a04ea31307ab447d3cadfc304f58e" target="_blank" rel="noopener" class="cert-card reveal" style="transition-delay: 0.25s;">
         <div class="cert-icon">
@@ -1130,8 +1001,8 @@ footer {
 <section id="projects">
   <div class="container">
     <div class="reveal">
-      <span class="section-label">04 Projects</span>
-      <h2 class="section-title">Things I've built.</h2>
+      <span style="font-family:'SF Pro Display',-apple-system,sans-serif;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--coral);font-style:italic;margin-bottom:12px;display:block;">04 Projects</span>
+      <h2 style="font-family:'SF Pro Display',-apple-system,sans-serif;font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.03em;color:var(--text-primary);margin-bottom:48px;line-height:1.15;">Things I've built.</h2>
     </div>
     <div class="project-item reveal" style="transition-delay: 0.1s;">
       <div class="project-screenshot">
@@ -1153,7 +1024,7 @@ footer {
       </div>
       <div class="project-details">
         <h3 class="project-title">ToneTracker.</h3>
-        <p class="project-desc">A user-friendly web application built with Streamlit and Python that analyzes the sentiment of any given text (like a message, tweet, or review) and classifies it as positive or negative. This project uses a Naive Bayes classifier trained on the popular Sentiment140 dataset, which contains 1.6 million tweets.</p>
+        <p class="project-desc">A user-friendly web application built with Streamlit and Python that analyzes the sentiment of any given text and classifies it as positive or negative. Trained on the Sentiment140 dataset with 1.6 million tweets.</p>
         <a href="https://sentiment-frontend-7x2szjgjcndbxvn6byefkk.streamlit.app" target="_blank" rel="noopener" class="project-link">
           <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 3H3v10h10V9"/><path d="M9 1h4v4"/><path d="M13 1L6 8"/></svg>
           sentiment-frontend-7x2szjgjcndbxvn6byefkk.streamlit.app
@@ -1197,19 +1068,16 @@ footer {
 <section id="contact">
   <div class="container">
     <div class="reveal">
-      <span class="section-label">05 Get in Touch</span>
-      <h2 class="section-title">Let's connect :)</h2>
+      <span style="font-family:'SF Pro Display',-apple-system,sans-serif;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--coral);font-style:italic;margin-bottom:12px;display:block;">05 Get in Touch</span>
+      <h2 style="font-family:'SF Pro Display',-apple-system,sans-serif;font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.03em;color:var(--text-primary);margin-bottom:48px;line-height:1.15;">Let's connect :)</h2>
     </div>
     <div class="contact-grid">
       <div class="contact-left reveal" style="transition-delay: 0.1s;">
         <div class="contact-illustration">
           <svg viewBox="0 0 240 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Envelope body -->
             <rect x="30" y="50" width="180" height="110" rx="12" fill="#1a1a1a" opacity="0.08"/>
             <rect x="34" y="54" width="172" height="102" rx="10" fill="#fff" stroke="#708090" stroke-width="2"/>
-            <!-- Envelope flap -->
             <path d="M34,54 L120,115 L206,54" stroke="#708090" stroke-width="2" fill="none"/>
-            <!-- Paper planes -->
             <g class="paper-plane">
               <path d="M160,40 L180,30 L170,50 L165,42Z" fill="#708090" opacity="0.7"/>
               <line x1="170" y1="50" x2="160" y2="60" stroke="#708090" stroke-width="1" opacity="0.4"/>
@@ -1218,7 +1086,6 @@ footer {
               <path d="M60,35 L80,25 L70,45 L65,37Z" fill="#8a9bab" opacity="0.6"/>
               <line x1="70" y1="45" x2="60" y2="55" stroke="#8a9bab" stroke-width="1" opacity="0.3"/>
             </g>
-            <!-- Decorative dots -->
             <circle cx="40" cy="140" r="3" fill="#708090" opacity="0.3"/>
             <circle cx="200" cy="130" r="2" fill="#8a9bab" opacity="0.3"/>
           </svg>
@@ -1253,7 +1120,7 @@ footer {
 </section>
 
 <!-- Footer -->
-<footer>&copy; 2024 Saif Ahmed. All rights reserved.</footer>
+<footer>&copy; 2025 Saif Ahmed. All rights reserved.</footer>
 
 <!-- ============================================================
      JAVASCRIPT
@@ -1270,9 +1137,7 @@ window.addEventListener('scroll', () => {
 // Intersection Observer for reveal animations
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
+    if (entry.isIntersecting) entry.target.classList.add('visible');
   });
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
@@ -1321,173 +1186,306 @@ function sendEmail() {
 }
 
 // ============================================================
-// PARTICLE SPHERE
+// PARTICLE CUBE — Hero
 // ============================================================
-(function() {
-  const canvas = document.getElementById('particle-sphere');
+(function () {
+  const CONFIG = {
+    width: 90, height: 90,
+    radius: 27, coneHeight: 42,
+    particleSpacing: 2.8, dotSize: 0.85,
+    color: '231, 111, 81',
+    rotationSpeed: 0.012, tiltX: 0.35, fov: 135,
+  };
+
+  const canvas = document.getElementById('hero-cone');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
+  canvas.width = CONFIG.width;
+  canvas.height = CONFIG.height;
 
-  const dpr = window.devicePixelRatio || 1;
-  let W, H, cx, cy, radius;
+  function buildConePoints() {
+    const pts   = [];
+    const R     = CONFIG.radius;
+    const H     = CONFIG.coneHeight;
+    const STEP  = CONFIG.particleSpacing;
+    const baseY = H / 2;
 
-  function resize() {
-    const rect = canvas.getBoundingClientRect();
-    W = rect.width; H = rect.height;
-    canvas.width = W * dpr; canvas.height = H * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    cx = W / 2; cy = H / 2;
-    radius = Math.min(W, H) * 0.38;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  // All skill keywords
-  const skills = [
-    'Python', 'Java', 'C++', 'JavaScript', 'React.js', 'BASH', 'HTML', 'CSS',
-    'SQL', 'NoSQL', 'REST APIs', 'RDBMS', 'Milvus', 'Tableau', 'ETL',
-    'Vector DB', 'Tokenization', 'CRM', 'Git', 'GitHub', 'Jupyter',
-    'Colab', 'VSCode', 'Linux', 'LXC', 'Streamlit', 'Reflex',
-    'TensorFlow', 'Huggingface', 'OpenAI', 'LangChain', 'vLLM', 'Ollama',
-    'LlamaIndex', 'NLP', 'Embeddings', 'Prompt Eng.', 'n8n', 'Zapier',
-    'Langflow', 'NER', 'Sentiment', 'TF-IDF', 'Random Forest', 'SVM',
-    'Logistic Reg.', 'Supervised ML', 'Classification', 'Figma', 'UX/UI',
-    'Prototyping', 'Excel'
-  ];
-
-  // Distribute skill labels on sphere using fibonacci
-  const goldenAngle = Math.PI * (3 - Math.sqrt(5));
-  const tags = [];
-
-  for (let i = 0; i < skills.length; i++) {
-    const y = 1 - (i / (skills.length - 1)) * 2;
-    const radiusAtY = Math.sqrt(1 - y * y);
-    const theta = goldenAngle * i;
-
-    tags.push({
-      label: skills[i],
-      ox: Math.cos(theta) * radiusAtY,
-      oy: y,
-      oz: Math.sin(theta) * radiusAtY,
-      px: 0, py: 0, z: 0, alpha: 0, scale: 0,
-    });
-  }
-
-  // Filler particles to fill in the sphere shape
-  const FILLER_COUNT = 500;
-  const fillers = [];
-  for (let i = 0; i < FILLER_COUNT; i++) {
-    const y = 1 - (i / (FILLER_COUNT - 1)) * 2;
-    const radiusAtY = Math.sqrt(1 - y * y);
-    const theta = goldenAngle * i * 1.618;
-
-    fillers.push({
-      ox: Math.cos(theta) * radiusAtY,
-      oy: y,
-      oz: Math.sin(theta) * radiusAtY,
-      px: 0, py: 0, z: 0, alpha: 0, size: 0,
-    });
-  }
-
-  // Mouse interaction
-  let mouseX = 0, mouseY = 0;
-  canvas.addEventListener('mousemove', (e) => {
-    const rect = canvas.getBoundingClientRect();
-    mouseX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
-    mouseY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-  });
-  canvas.addEventListener('mouseleave', () => { mouseX = 0; mouseY = 0; });
-
-  let rotY = 0;
-  let rotX = 0;
-  let time = 0;
-
-  const fontFamily = '"SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-
-  function project(ox, oy, oz, breathe, cosY, sinY, cosX, sinX) {
-    let x = ox * breathe, y = oy * breathe, z = oz * breathe;
-    const x1 = x * cosY - z * sinY;
-    const z1 = x * sinY + z * cosY;
-    const y1 = y * cosX - z1 * sinX;
-    const z2 = y * sinX + z1 * cosX;
-    const perspective = 2.2;
-    const s = perspective / (perspective + z2);
-    return {
-      px: cx + x1 * radius * s,
-      py: cy + y1 * radius * s,
-      z: z2, scale: s,
-      alpha: (0.08 + 0.92 * ((z2 + 1) / 2)) * s,
-    };
-  }
-
-  function animate() {
-    time += 0.003;
-    ctx.clearRect(0, 0, W, H);
-
-    rotY += 0.005 + mouseX * 0.003;
-    rotX += (-0.1 - mouseY * 0.25 - rotX) * 0.02;
-
-    const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
-    const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
-    const breathe = 1 + Math.sin(time * 1.5) * 0.012;
-
-    // Project fillers
-    for (let i = 0; i < FILLER_COUNT; i++) {
-      const f = fillers[i];
-      const p = project(f.ox, f.oy, f.oz, breathe, cosY, sinY, cosX, sinX);
-      f.px = p.px; f.py = p.py; f.z = p.z;
-      f.alpha = p.alpha; f.size = Math.max(0.3, 1.1 * p.scale);
-    }
-
-    // Project tags
-    for (let i = 0; i < tags.length; i++) {
-      const t = tags[i];
-      const p = project(t.ox, t.oy, t.oz, breathe, cosY, sinY, cosX, sinX);
-      t.px = p.px; t.py = p.py; t.z = p.z;
-      t.alpha = p.alpha; t.scale = p.scale;
-    }
-
-    // Combine and sort by depth
-    const all = [];
-    for (let i = 0; i < FILLER_COUNT; i++) all.push({ type: 'dot', ref: fillers[i], z: fillers[i].z });
-    for (let i = 0; i < tags.length; i++) all.push({ type: 'tag', ref: tags[i], z: tags[i].z });
-    all.sort((a, b) => a.z - b.z);
-
-    // Draw
-    for (let i = 0; i < all.length; i++) {
-      const item = all[i];
-      if (item.type === 'dot') {
-        const f = item.ref;
-        ctx.beginPath();
-        ctx.arc(f.px, f.py, f.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(79,109,122,${f.alpha * 0.45})`;
-        ctx.fill();
-      } else {
-        const t = item.ref;
-        const fontSize = Math.max(6, Math.round(10 * t.scale));
-        ctx.font = `italic 700 ${fontSize}px ${fontFamily}`;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-
-        // Coral color with depth-based alpha
-        ctx.fillStyle = `rgba(79,109,122,${t.alpha})`;
-        ctx.fillText(t.label, t.px, t.py);
+    for (let px = -R; px <= R; px += STEP) {
+      for (let pz = -R; pz <= R; pz += STEP) {
+        if (px * px + pz * pz <= R * R) pts.push({ x: px, y: baseY, z: pz });
       }
     }
 
-    // Subtle center glow
-    const glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius * 0.5);
-    glow.addColorStop(0, 'rgba(79,109,122,0.03)');
-    glow.addColorStop(1, 'rgba(79,109,122,0)');
-    ctx.beginPath();
-    ctx.arc(cx, cy, radius * 0.5, 0, Math.PI * 2);
-    ctx.fillStyle = glow;
-    ctx.fill();
-
-    requestAnimationFrame(animate);
+    const slices = Math.ceil(H / STEP);
+    for (let si = 0; si <= slices; si++) {
+      const t = si / slices;
+      const y = baseY - t * H;
+      const r = R * (1 - t);
+      const steps = Math.max(1, Math.round(2 * Math.PI * r / STEP));
+      for (let j = 0; j < steps; j++) {
+        const theta = (2 * Math.PI * j) / steps;
+        pts.push({ x: r * Math.cos(theta), y, z: r * Math.sin(theta) });
+      }
+    }
+    return pts;
   }
 
-  animate();
+  const points = buildConePoints();
+  let angleY = 0;
+
+  function rotateX(p, a) { return { x: p.x, y: p.y * Math.cos(a) - p.z * Math.sin(a), z: p.y * Math.sin(a) + p.z * Math.cos(a) }; }
+  function rotateY(p, a) { return { x: p.x * Math.cos(a) + p.z * Math.sin(a), y: p.y, z: -p.x * Math.sin(a) + p.z * Math.cos(a) }; }
+  function project(p) {
+    const z = p.z + CONFIG.fov;
+    return { x: (p.x * CONFIG.fov) / z + CONFIG.width / 2, y: (p.y * CONFIG.fov) / z + CONFIG.height / 2, z: p.z };
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, CONFIG.width, CONFIG.height);
+    angleY += CONFIG.rotationSpeed;
+    const projected = points.map(p => { let r = rotateX(p, CONFIG.tiltX); r = rotateY(r, angleY); return project(r); });
+    projected.sort((a, b) => a.z - b.z);
+    const R = CONFIG.radius;
+    for (const p of projected) {
+      const depth  = (p.z + R + 80) / (R * 2 + 80);
+      const alpha  = 0.15 + depth * 0.85;
+      const radius = CONFIG.dotSize * (0.4 + depth * 0.7);
+      ctx.beginPath(); ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${CONFIG.color}, ${alpha})`; ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ============================================================
+// PARTICLE PENTAGON — Experience
+// ============================================================
+(function () {
+  const CONFIG = {
+    width: 70, height: 70,
+    radius: 22, depth: 16, sides: 5,
+    particleSpacing: 2.8, dotSize: 0.85,
+    color: '231, 111, 81',
+    rotationSpeed: 0.012, tiltX: 0.4, fov: 105,
+  };
+
+  const canvas = document.getElementById('exp-pentagon');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  canvas.width = CONFIG.width; canvas.height = CONFIG.height;
+
+  const { radius: R, depth: D, sides: N, particleSpacing: STEP } = CONFIG;
+
+  function insidePolygon(px, pz) {
+    for (let i = 0; i < N; i++) {
+      const a1 = (2 * Math.PI * i / N) - Math.PI / 2;
+      const a2 = (2 * Math.PI * ((i + 1) % N) / N) - Math.PI / 2;
+      const x1 = R * Math.cos(a1), z1 = R * Math.sin(a1);
+      const x2 = R * Math.cos(a2), z2 = R * Math.sin(a2);
+      if ((x2 - x1) * (pz - z1) - (z2 - z1) * (px - x1) > 0) return false;
+    }
+    return true;
+  }
+
+  function buildPoints() {
+    const pts = [];
+    for (const capY of [-D, D]) {
+      for (let px = -R; px <= R; px += STEP) {
+        for (let pz = -R; pz <= R; pz += STEP) {
+          if (insidePolygon(px, pz)) pts.push({ x: px, y: capY, z: pz });
+        }
+      }
+    }
+    for (let i = 0; i < N; i++) {
+      const a1 = (2 * Math.PI * i / N) - Math.PI / 2;
+      const a2 = (2 * Math.PI * ((i + 1) % N) / N) - Math.PI / 2;
+      const x1 = R * Math.cos(a1), z1 = R * Math.sin(a1);
+      const x2 = R * Math.cos(a2), z2 = R * Math.sin(a2);
+      const edgeLen = Math.sqrt((x2 - x1) ** 2 + (z2 - z1) ** 2);
+      const stepsAlong = Math.ceil(edgeLen / STEP);
+      const stepsUp = Math.ceil((D * 2) / STEP);
+      for (let si = 0; si <= stepsAlong; si++) {
+        const t = si / stepsAlong;
+        const px = x1 + t * (x2 - x1), pz = z1 + t * (z2 - z1);
+        for (let sj = 0; sj <= stepsUp; sj++) {
+          pts.push({ x: px, y: -D + sj * (D * 2 / stepsUp), z: pz });
+        }
+      }
+    }
+    return pts;
+  }
+
+  const points = buildPoints();
+  let angleY = 0;
+
+  function rotateX(p, a) { return { x: p.x, y: p.y * Math.cos(a) - p.z * Math.sin(a), z: p.y * Math.sin(a) + p.z * Math.cos(a) }; }
+  function rotateY(p, a) { return { x: p.x * Math.cos(a) + p.z * Math.sin(a), y: p.y, z: -p.x * Math.sin(a) + p.z * Math.cos(a) }; }
+  function project(p) {
+    const z = p.z + CONFIG.fov;
+    return { x: (p.x * CONFIG.fov) / z + CONFIG.width / 2, y: (p.y * CONFIG.fov) / z + CONFIG.height / 2, z: p.z };
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, CONFIG.width, CONFIG.height);
+    angleY += CONFIG.rotationSpeed;
+    const projected = points.map(p => { let r = rotateX(p, CONFIG.tiltX); r = rotateY(r, angleY); return project(r); });
+    projected.sort((a, b) => a.z - b.z);
+    for (const p of projected) {
+      const depth = (p.z + R + 80) / (R * 2 + 80);
+      const alpha = 0.15 + depth * 0.85;
+      const radius = CONFIG.dotSize * (0.4 + depth * 0.7);
+      ctx.beginPath(); ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${CONFIG.color}, ${alpha})`; ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ============================================================
+// PARTICLE SPHERE — Skills
+// ============================================================
+(function () {
+  const CONFIG = {
+    width: 70, height: 70,
+    radius: 24, particleSpacing: 7, dotSize: 0.85,
+    color: '231, 111, 81',
+    rotationSpeed: 0.012, tiltX: 0.4, fov: 105,
+  };
+
+  const canvas = document.getElementById('skills-sphere');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  canvas.width = CONFIG.width; canvas.height = CONFIG.height;
+
+  function buildSpherePoints() {
+    const pts = [], R = CONFIG.radius;
+    const circumference = 2 * Math.PI * R;
+    const latSteps = Math.round(circumference / CONFIG.particleSpacing);
+    for (let i = 0; i <= latSteps; i++) {
+      const phi = (Math.PI * i) / latSteps;
+      const ringRadius = R * Math.sin(phi);
+      const lonSteps = Math.max(1, Math.round(2 * Math.PI * ringRadius / CONFIG.particleSpacing));
+      for (let j = 0; j < lonSteps; j++) {
+        const theta = (2 * Math.PI * j) / lonSteps;
+        pts.push({ x: ringRadius * Math.cos(theta), y: R * Math.cos(phi), z: ringRadius * Math.sin(theta) });
+      }
+    }
+    return pts;
+  }
+
+  const points = buildSpherePoints();
+  let angleY = 0;
+
+  function rotateX(p, a) { return { x: p.x, y: p.y * Math.cos(a) - p.z * Math.sin(a), z: p.y * Math.sin(a) + p.z * Math.cos(a) }; }
+  function rotateY(p, a) { return { x: p.x * Math.cos(a) + p.z * Math.sin(a), y: p.y, z: -p.x * Math.sin(a) + p.z * Math.cos(a) }; }
+  function project(p) {
+    const z = p.z + CONFIG.fov;
+    return { x: (p.x * CONFIG.fov) / z + CONFIG.width / 2, y: (p.y * CONFIG.fov) / z + CONFIG.height / 2, z: p.z };
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, CONFIG.width, CONFIG.height);
+    angleY += CONFIG.rotationSpeed;
+    const projected = points.map(p => { let r = rotateX(p, CONFIG.tiltX); r = rotateY(r, angleY); return project(r); });
+    projected.sort((a, b) => a.z - b.z);
+    const R = CONFIG.radius;
+    for (const p of projected) {
+      const depth = (p.z + R + 80) / (R * 2 + 80);
+      const alpha = 0.15 + depth * 0.85;
+      const radius = CONFIG.dotSize * (0.4 + depth * 0.7);
+      ctx.beginPath(); ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${CONFIG.color}, ${alpha})`; ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ============================================================
+// PARTICLE OCTAGON — Education
+// ============================================================
+(function () {
+  const CONFIG = {
+    width: 70, height: 70,
+    radius: 22, depth: 16, sides: 8,
+    particleSpacing: 2.8, dotSize: 0.85,
+    color: '231, 111, 81',
+    rotationSpeed: 0.012, tiltX: 0.4, fov: 105,
+  };
+
+  const canvas = document.getElementById('edu-octagon');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  canvas.width = CONFIG.width; canvas.height = CONFIG.height;
+
+  const { radius: R, depth: D, sides: N, particleSpacing: STEP } = CONFIG;
+
+  function insidePolygon(px, pz) {
+    for (let i = 0; i < N; i++) {
+      const a1 = (2 * Math.PI * i / N) - Math.PI / 2;
+      const a2 = (2 * Math.PI * ((i + 1) % N) / N) - Math.PI / 2;
+      const x1 = R * Math.cos(a1), z1 = R * Math.sin(a1);
+      const x2 = R * Math.cos(a2), z2 = R * Math.sin(a2);
+      if ((x2 - x1) * (pz - z1) - (z2 - z1) * (px - x1) > 0) return false;
+    }
+    return true;
+  }
+
+  function buildPoints() {
+    const pts = [];
+    for (const capY of [-D, D]) {
+      for (let px = -R; px <= R; px += STEP) {
+        for (let pz = -R; pz <= R; pz += STEP) {
+          if (insidePolygon(px, pz)) pts.push({ x: px, y: capY, z: pz });
+        }
+      }
+    }
+    for (let i = 0; i < N; i++) {
+      const a1 = (2 * Math.PI * i / N) - Math.PI / 2;
+      const a2 = (2 * Math.PI * ((i + 1) % N) / N) - Math.PI / 2;
+      const x1 = R * Math.cos(a1), z1 = R * Math.sin(a1);
+      const x2 = R * Math.cos(a2), z2 = R * Math.sin(a2);
+      const edgeLen = Math.sqrt((x2 - x1) ** 2 + (z2 - z1) ** 2);
+      const stepsAlong = Math.ceil(edgeLen / STEP);
+      const stepsUp = Math.ceil((D * 2) / STEP);
+      for (let si = 0; si <= stepsAlong; si++) {
+        const t = si / stepsAlong;
+        const px = x1 + t * (x2 - x1), pz = z1 + t * (z2 - z1);
+        for (let sj = 0; sj <= stepsUp; sj++) {
+          pts.push({ x: px, y: -D + sj * (D * 2 / stepsUp), z: pz });
+        }
+      }
+    }
+    return pts;
+  }
+
+  const points = buildPoints();
+  let angleY = 0;
+
+  function rotateX(p, a) { return { x: p.x, y: p.y * Math.cos(a) - p.z * Math.sin(a), z: p.y * Math.sin(a) + p.z * Math.cos(a) }; }
+  function rotateY(p, a) { return { x: p.x * Math.cos(a) + p.z * Math.sin(a), y: p.y, z: -p.x * Math.sin(a) + p.z * Math.cos(a) }; }
+  function project(p) {
+    const z = p.z + CONFIG.fov;
+    return { x: (p.x * CONFIG.fov) / z + CONFIG.width / 2, y: (p.y * CONFIG.fov) / z + CONFIG.height / 2, z: p.z };
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, CONFIG.width, CONFIG.height);
+    angleY += CONFIG.rotationSpeed;
+    const projected = points.map(p => { let r = rotateX(p, CONFIG.tiltX); r = rotateY(r, angleY); return project(r); });
+    projected.sort((a, b) => a.z - b.z);
+    for (const p of projected) {
+      const depth = (p.z + R + 80) / (R * 2 + 80);
+      const alpha = 0.15 + depth * 0.85;
+      const radius = CONFIG.dotSize * (0.4 + depth * 0.7);
+      ctx.beginPath(); ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${CONFIG.color}, ${alpha})`; ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
 })();
 
 // ============================================================
@@ -1530,8 +1528,7 @@ function sendEmail() {
 
   function showTyping() {
     const div = document.createElement('div');
-    div.className = 'chat-typing';
-    div.id = 'typing-indicator';
+    div.className = 'chat-typing'; div.id = 'typing-indicator';
     div.innerHTML = '<span></span><span></span><span></span>';
     chatMessages.appendChild(div);
     chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -1550,10 +1547,7 @@ function sendEmail() {
     addMessage(text, 'user');
     conversationHistory.push({ role: 'user', content: text });
 
-    // Keep conversation history to last 10
-    if (conversationHistory.length > 10) {
-      conversationHistory = conversationHistory.slice(-10);
-    }
+    if (conversationHistory.length > 10) conversationHistory = conversationHistory.slice(-10);
 
     showTyping();
 
@@ -1580,11 +1574,9 @@ function sendEmail() {
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-
         buffer += decoder.decode(value, { stream: true });
         const lines = buffer.split('\n');
         buffer = lines.pop() || '';
-
         for (const line of lines) {
           const trimmed = line.trim();
           if (!trimmed || !trimmed.startsWith('data: ')) continue;
@@ -1592,27 +1584,16 @@ function sendEmail() {
           if (data === '[DONE]') continue;
           try {
             const parsed = JSON.parse(data);
-            if (parsed.token) {
-              fullResponse += parsed.token;
-              aiDiv.textContent = fullResponse;
-              chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
+            if (parsed.token) { fullResponse += parsed.token; aiDiv.textContent = fullResponse; chatMessages.scrollTop = chatMessages.scrollHeight; }
             if (parsed.error) throw new Error(parsed.error);
-          } catch (e) {
-            if (e.message === 'Stream interrupted') throw e;
-          }
+          } catch (e) { if (e.message === 'Stream interrupted') throw e; }
         }
       }
 
-      if (fullResponse) {
-        conversationHistory.push({ role: 'assistant', content: fullResponse });
-      }
+      if (fullResponse) conversationHistory.push({ role: 'assistant', content: fullResponse });
     } catch (err) {
       hideTyping();
-      addMessage(
-        'Sorry, I\'m unavailable right now. Feel free to reach Saif directly at saifanis03@gmail.com',
-        'ai'
-      );
+      addMessage('Sorry, I\'m unavailable right now. Feel free to reach Saif directly at saifanis03@gmail.com', 'ai');
     } finally {
       isStreaming = false;
     }
@@ -1620,26 +1601,18 @@ function sendEmail() {
 
   function handleHeroSend() {
     const text = heroInput.value.trim();
-    if (text) {
-      sendMessage(text);
-      heroInput.value = '';
-    }
+    if (text) { sendMessage(text); heroInput.value = ''; }
   }
 
   function handleFollowSend() {
     const text = followInput.value.trim();
-    if (text) {
-      sendMessage(text);
-      followInput.value = '';
-    }
+    if (text) { sendMessage(text); followInput.value = ''; }
   }
 
   heroSend.addEventListener('click', handleHeroSend);
   heroInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') handleHeroSend(); });
-
   followSend.addEventListener('click', handleFollowSend);
   followInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') handleFollowSend(); });
-
   closeBtn.addEventListener('click', closeChat);
 })();
 </script>

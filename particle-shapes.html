@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Particle Shapes</title>
+  <style>
+    /* ── Demo wrapper – remove in production ── */
+    body {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      min-height: 100vh;
+      background: #f5f5f5;
+      font-family: sans-serif;
+    }
+
+    .profile-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: #fff;
+      padding: 20px 28px;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    }
+
+    .profile-info h2 {
+      margin: 0 0 4px;
+      font-size: 16px;
+      color: #111;
+    }
+
+    .profile-info p {
+      margin: 0;
+      font-size: 13px;
+      color: #666;
+    }
+
+    canvas { display: block; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- =====================================================
+    PARTICLE CUBE
+    Drop the <canvas id="particle-cube"> + its <script> block
+    anywhere on your page.
+  ====================================================== -->
+  <div class="profile-card">
+    <canvas id="particle-cube"></canvas>
+    <div class="profile-info">
+      <h2>Your Name</h2>
+      <p>Your Title · Cube</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const CONFIG = {
+        width:           120,
+        height:          120,
+        cubeSize:        38,
+        particleSpacing: 2.8,
+        dotSize:         0.85,
+        color:           '148, 210, 189',  // #94d2bd
+        rotationSpeed:   0.012,
+        tiltX:           0.4,
+        fov:             180,
+      };
+
+      const canvas = document.getElementById('particle-cube');
+      const ctx    = canvas.getContext('2d');
+      canvas.width  = CONFIG.width;
+      canvas.height = CONFIG.height;
+
+      function buildCubePoints() {
+        const pts  = [];
+        const step = CONFIG.particleSpacing;
+        const h    = CONFIG.cubeSize / 2;
+        for (let x = -h; x <= h; x += step) {
+          for (let y = -h; y <= h; y += step) {
+            pts.push({ x, y, z:  h });
+            pts.push({ x, y, z: -h });
+          }
+        }
+        for (let x = -h; x <= h; x += step) {
+          for (let z = -h; z <= h; z += step) {
+            pts.push({ x, y:  h, z });
+            pts.push({ x, y: -h, z });
+          }
+        }
+        for (let y = -h; y <= h; y += step) {
+          for (let z = -h; z <= h; z += step) {
+            pts.push({ x:  h, y, z });
+            pts.push({ x: -h, y, z });
+          }
+        }
+        return pts;
+      }
+
+      const points = buildCubePoints();
+      let angleY = 0;
+
+      function rotateX(p, a) {
+        return { x: p.x, y: p.y * Math.cos(a) - p.z * Math.sin(a), z: p.y * Math.sin(a) + p.z * Math.cos(a) };
+      }
+      function rotateY(p, a) {
+        return { x: p.x * Math.cos(a) + p.z * Math.sin(a), y: p.y, z: -p.x * Math.sin(a) + p.z * Math.cos(a) };
+      }
+      function project(p) {
+        const z = p.z + CONFIG.fov;
+        return { x: (p.x * CONFIG.fov) / z + CONFIG.width / 2, y: (p.y * CONFIG.fov) / z + CONFIG.height / 2, z: p.z };
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, CONFIG.width, CONFIG.height);
+        angleY += CONFIG.rotationSpeed;
+        const projected = points.map(p => {
+          let r = rotateX(p, CONFIG.tiltX);
+          r = rotateY(r, angleY);
+          return project(r);
+        });
+        projected.sort((a, b) => a.z - b.z);
+        const range = CONFIG.cubeSize + 80;
+        for (const p of projected) {
+          const depth  = (p.z + CONFIG.cubeSize + 80) / (range * 2);
+          const alpha  = 0.15 + depth * 0.85;
+          const radius = CONFIG.dotSize * (0.4 + depth * 0.7);
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${CONFIG.color}, ${alpha})`;
+          ctx.fill();
+        }
+        requestAnimationFrame(draw);
+      }
+
+      draw();
+    })();
+  </script>
+
+
+  <!-- =====================================================
+    PARTICLE PENTAGON
+    Drop the <canvas id="particle-pentagon"> + its <script>
+    block anywhere on your page.
+  ====================================================== -->
+  <div class="profile-card">
+    <canvas id="particle-pentagon"></canvas>
+    <div class="profile-info">
+      <h2>Your Name</h2>
+      <p>Your Title · Pentagon</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const CONFIG = {
+        width:           120,
+        height:          120,
+        radius:          36,
+        depth:           28,
+        sides:           5,
+        particleSpacing: 2.8,
+        dotSize:         0.85,
+        color:           '148, 210, 189',  // #94d2bd
+        rotationSpeed:   0.012,
+        tiltX:           0.4,
+        fov:             180,
+      };
+
+      const canvas = document.getElementById('particle-pentagon');
+      const ctx    = canvas.getContext('2d');
+      canvas.width  = CONFIG.width;
+      canvas.height = CONFIG.height;
+
+      const { radius: R, depth: D, sides: N, particleSpacing: STEP } = CONFIG;
+
+      function insidePolygon(px, pz) {
+        for (let i = 0; i < N; i++) {
+          const a1 = (2 * Math.PI * i / N) - Math.PI / 2;
+          const a2 = (2 * Math.PI * ((i + 1) % N) / N) - Math.PI / 2;
+          const x1 = R * Math.cos(a1), z1 = R * Math.sin(a1);
+          const x2 = R * Math.cos(a2), z2 = R * Math.sin(a2);
+          if ((x2 - x1) * (pz - z1) - (z2 - z1) * (px - x1) > 0) return false;
+        }
+        return true;
+      }
+
+      function buildPoints() {
+        const pts = [];
+        for (const capY of [-D, D]) {
+          for (let px = -R; px <= R; px += STEP) {
+            for (let pz = -R; pz <= R; pz += STEP) {
+              if (insidePolygon(px, pz)) pts.push({ x: px, y: capY, z: pz });
+            }
+          }
+        }
+        for (let i = 0; i < N; i++) {
+          const a1 = (2 * Math.PI * i / N) - Math.PI / 2;
+          const a2 = (2 * Math.PI * ((i + 1) % N) / N) - Math.PI / 2;
+          const x1 = R * Math.cos(a1), z1 = R * Math.sin(a1);
+          const x2 = R * Math.cos(a2), z2 = R * Math.sin(a2);
+          const edgeLen    = Math.sqrt((x2-x1)**2 + (z2-z1)**2);
+          const stepsAlong = Math.ceil(edgeLen / STEP);
+          const stepsUp    = Math.ceil((D * 2) / STEP);
+          for (let si = 0; si <= stepsAlong; si++) {
+            const t  = si / stepsAlong;
+            const px = x1 + t * (x2 - x1);
+            const pz = z1 + t * (z2 - z1);
+            for (let sj = 0; sj <= stepsUp; sj++) {
+              pts.push({ x: px, y: -D + sj * (D * 2 / stepsUp), z: pz });
+            }
+          }
+        }
+        return pts;
+      }
+
+      const points = buildPoints();
+      let angleY = 0;
+
+      function rotateX(p, a) {
+        return { x: p.x, y: p.y * Math.cos(a) - p.z * Math.sin(a), z: p.y * Math.sin(a) + p.z * Math.cos(a) };
+      }
+      function rotateY(p, a) {
+        return { x: p.x * Math.cos(a) + p.z * Math.sin(a), y: p.y, z: -p.x * Math.sin(a) + p.z * Math.cos(a) };
+      }
+      function project(p) {
+        const z = p.z + CONFIG.fov;
+        return { x: (p.x * CONFIG.fov) / z + CONFIG.width / 2, y: (p.y * CONFIG.fov) / z + CONFIG.height / 2, z: p.z };
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, CONFIG.width, CONFIG.height);
+        angleY += CONFIG.rotationSpeed;
+        const projected = points.map(p => {
+          let r = rotateX(p, CONFIG.tiltX);
+          r = rotateY(r, angleY);
+          return project(r);
+        });
+        projected.sort((a, b) => a.z - b.z);
+        for (const p of projected) {
+          const depth  = (p.z + R + 80) / (R * 2 + 80);
+          const alpha  = 0.15 + depth * 0.85;
+          const radius = CONFIG.dotSize * (0.4 + depth * 0.7);
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${CONFIG.color}, ${alpha})`;
+          ctx.fill();
+        }
+        requestAnimationFrame(draw);
+      }
+
+      draw();
+    })();
+  </script>
+
+
+  <!-- =====================================================
+    PARTICLE SPHERE
+    Drop the <canvas id="particle-sphere"> + its <script>
+    block anywhere on your page.
+  ====================================================== -->
+  <div class="profile-card">
+    <canvas id="particle-sphere"></canvas>
+    <div class="profile-info">
+      <h2>Your Name</h2>
+      <p>Your Title · Sphere</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const CONFIG = {
+        width:           120,
+        height:          120,
+        radius:          40,
+        particleSpacing: 7,
+        dotSize:         0.85,
+        color:           '148, 210, 189',  // #94d2bd
+        rotationSpeed:   0.012,
+        tiltX:           0.4,
+        fov:             180,
+      };
+
+      const canvas = document.getElementById('particle-sphere');
+      const ctx    = canvas.getContext('2d');
+      canvas.width  = CONFIG.width;
+      canvas.height = CONFIG.height;
+
+      function buildSpherePoints() {
+        const pts = [];
+        const R   = CONFIG.radius;
+        const circumference = 2 * Math.PI * R;
+        const latSteps = Math.round(circumference / CONFIG.particleSpacing);
+        for (let i = 0; i <= latSteps; i++) {
+          const phi        = (Math.PI * i) / latSteps;
+          const ringRadius = R * Math.sin(phi);
+          const lonSteps   = Math.max(1, Math.round(2 * Math.PI * ringRadius / CONFIG.particleSpacing));
+          for (let j = 0; j < lonSteps; j++) {
+            const theta = (2 * Math.PI * j) / lonSteps;
+            pts.push({
+              x: ringRadius * Math.cos(theta),
+              y: R * Math.cos(phi),
+              z: ringRadius * Math.sin(theta),
+            });
+          }
+        }
+        return pts;
+      }
+
+      const points = buildSpherePoints();
+      let angleY = 0;
+
+      function rotateX(p, a) {
+        return { x: p.x, y: p.y * Math.cos(a) - p.z * Math.sin(a), z: p.y * Math.sin(a) + p.z * Math.cos(a) };
+      }
+      function rotateY(p, a) {
+        return { x: p.x * Math.cos(a) + p.z * Math.sin(a), y: p.y, z: -p.x * Math.sin(a) + p.z * Math.cos(a) };
+      }
+      function project(p) {
+        const z = p.z + CONFIG.fov;
+        return { x: (p.x * CONFIG.fov) / z + CONFIG.width / 2, y: (p.y * CONFIG.fov) / z + CONFIG.height / 2, z: p.z };
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, CONFIG.width, CONFIG.height);
+        angleY += CONFIG.rotationSpeed;
+        const projected = points.map(p => {
+          let r = rotateX(p, CONFIG.tiltX);
+          r = rotateY(r, angleY);
+          return project(r);
+        });
+        projected.sort((a, b) => a.z - b.z);
+        const R = CONFIG.radius;
+        for (const p of projected) {
+          const depth  = (p.z + R + 80) / (R * 2 + 80);
+          const alpha  = 0.15 + depth * 0.85;
+          const radius = CONFIG.dotSize * (0.4 + depth * 0.7);
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${CONFIG.color}, ${alpha})`;
+          ctx.fill();
+        }
+        requestAnimationFrame(draw);
+      }
+
+      draw();
+    })();
+  </script>
+
+
+  <!-- =====================================================
+    PARTICLE OCTAGON
+    Drop the <canvas id="particle-octagon"> + its <script>
+    block anywhere on your page.
+  ====================================================== -->
+  <div class="profile-card">
+    <canvas id="particle-octagon"></canvas>
+    <div class="profile-info">
+      <h2>Your Name</h2>
+      <p>Your Title · Octagon</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const CONFIG = {
+        width:           120,
+        height:          120,
+        radius:          36,
+        depth:           28,
+        sides:           8,
+        particleSpacing: 2.8,
+        dotSize:         0.85,
+        color:           '148, 210, 189',  // #94d2bd
+        rotationSpeed:   0.012,
+        tiltX:           0.4,
+        fov:             180,
+      };
+
+      const canvas = document.getElementById('particle-octagon');
+      const ctx    = canvas.getContext('2d');
+      canvas.width  = CONFIG.width;
+      canvas.height = CONFIG.height;
+
+      const { radius: R, depth: D, sides: N, particleSpacing: STEP } = CONFIG;
+
+      function insidePolygon(px, pz) {
+        for (let i = 0; i < N; i++) {
+          const a1 = (2 * Math.PI * i / N) - Math.PI / 2;
+          const a2 = (2 * Math.PI * ((i + 1) % N) / N) - Math.PI / 2;
+          const x1 = R * Math.cos(a1), z1 = R * Math.sin(a1);
+          const x2 = R * Math.cos(a2), z2 = R * Math.sin(a2);
+          if ((x2 - x1) * (pz - z1) - (z2 - z1) * (px - x1) > 0) return false;
+        }
+        return true;
+      }
+
+      function buildPoints() {
+        const pts = [];
+        for (const capY of [-D, D]) {
+          for (let px = -R; px <= R; px += STEP) {
+            for (let pz = -R; pz <= R; pz += STEP) {
+              if (insidePolygon(px, pz)) pts.push({ x: px, y: capY, z: pz });
+            }
+          }
+        }
+        for (let i = 0; i < N; i++) {
+          const a1 = (2 * Math.PI * i / N) - Math.PI / 2;
+          const a2 = (2 * Math.PI * ((i + 1) % N) / N) - Math.PI / 2;
+          const x1 = R * Math.cos(a1), z1 = R * Math.sin(a1);
+          const x2 = R * Math.cos(a2), z2 = R * Math.sin(a2);
+          const edgeLen    = Math.sqrt((x2-x1)**2 + (z2-z1)**2);
+          const stepsAlong = Math.ceil(edgeLen / STEP);
+          const stepsUp    = Math.ceil((D * 2) / STEP);
+          for (let si = 0; si <= stepsAlong; si++) {
+            const t  = si / stepsAlong;
+            const px = x1 + t * (x2 - x1);
+            const pz = z1 + t * (z2 - z1);
+            for (let sj = 0; sj <= stepsUp; sj++) {
+              pts.push({ x: px, y: -D + sj * (D * 2 / stepsUp), z: pz });
+            }
+          }
+        }
+        return pts;
+      }
+
+      const points = buildPoints();
+      let angleY = 0;
+
+      function rotateX(p, a) {
+        return { x: p.x, y: p.y * Math.cos(a) - p.z * Math.sin(a), z: p.y * Math.sin(a) + p.z * Math.cos(a) };
+      }
+      function rotateY(p, a) {
+        return { x: p.x * Math.cos(a) + p.z * Math.sin(a), y: p.y, z: -p.x * Math.sin(a) + p.z * Math.cos(a) };
+      }
+      function project(p) {
+        const z = p.z + CONFIG.fov;
+        return { x: (p.x * CONFIG.fov) / z + CONFIG.width / 2, y: (p.y * CONFIG.fov) / z + CONFIG.height / 2, z: p.z };
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, CONFIG.width, CONFIG.height);
+        angleY += CONFIG.rotationSpeed;
+        const projected = points.map(p => {
+          let r = rotateX(p, CONFIG.tiltX);
+          r = rotateY(r, angleY);
+          return project(r);
+        });
+        projected.sort((a, b) => a.z - b.z);
+        for (const p of projected) {
+          const depth  = (p.z + R + 80) / (R * 2 + 80);
+          const alpha  = 0.15 + depth * 0.85;
+          const radius = CONFIG.dotSize * (0.4 + depth * 0.7);
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${CONFIG.color}, ${alpha})`;
+          ctx.fill();
+        }
+        requestAnimationFrame(draw);
+      }
+
+      draw();
+    })();
+  </script>
+
+</body>
+</html>
