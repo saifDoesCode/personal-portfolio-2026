@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Primary Meta Tags -->
 <title>Saif Ahmed | AI Software Engineer</title>
+<script>
+  (function(){var t=localStorage.getItem('theme');if(t==='dark'||(t===null&&window.matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');})();
+</script>
 <meta name="title" content="Saif Ahmed | AI Software Engineer">
 <meta name="description" content="AI engineer specializing in LLM applications, RAG pipelines, and agentic systems.">
 
@@ -37,9 +40,9 @@
   --text-tertiary: #999999;
   --accent: #2563eb;
   --accent-hover: #1d4ed8;
-  --coral: #6f1d1b;
-  --coral-light: #9e2b27;
-  --coral-bg: rgba(111, 29, 27, 0.08);
+  --coral: #2ec4b6;
+  --coral-light: #26afa3;
+  --coral-bg: rgba(46, 196, 182, 0.08);
   --dark: #1a1a1a;
   --border: #e5e5e7;
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
@@ -49,6 +52,100 @@
   --radius-sm: 10px;
   --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
+
+/* ============================================================
+   DARK MODE VARIABLES
+   ============================================================ */
+[data-theme="dark"] {
+  --bg-primary: #111111;
+  --bg-secondary: #1a1a1a;
+  --bg-tertiary: #252525;
+  --text-primary: #f5f5f7;
+  --text-secondary: #a1a1a6;
+  --text-tertiary: #6e6e73;
+  --border: #3a3a3c;
+  --coral: #ffffff;
+  --coral-light: #cccccc;
+  --coral-bg: rgba(255, 255, 255, 0.08);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.5);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.6);
+}
+
+[data-theme="dark"] nav {
+  background: rgba(17,17,17,0.85);
+  border-bottom-color: rgba(255,255,255,0.06);
+}
+
+[data-theme="dark"] .mobile-nav {
+  background: rgba(17,17,17,0.97);
+  border-bottom-color: rgba(255,255,255,0.06);
+}
+
+[data-theme="dark"] .mobile-nav a {
+  border-bottom-color: rgba(255,255,255,0.06);
+}
+
+[data-theme="dark"] #chat-container {
+  background: rgba(26,26,26,0.92);
+  border-color: rgba(255,255,255,0.08);
+}
+
+[data-theme="dark"] .chat-header {
+  border-bottom-color: rgba(255,255,255,0.06);
+}
+
+[data-theme="dark"] .chat-input-bar {
+  border-top-color: rgba(255,255,255,0.06);
+}
+
+[data-theme="dark"] .chat-messages::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.12);
+}
+
+[data-theme="dark"] .skill-tag {
+  background: var(--bg-tertiary);
+}
+
+[data-theme="dark"] .contact-illustration rect[fill="#fff"] {
+  fill: #2a2a2a;
+}
+
+[data-theme="dark"] .logo span { color: #ffffff; }
+[data-theme="dark"] .edu-circle { background: #ffffff; }
+[data-theme="dark"] .project-bullet { background: #ffffff; }
+
+[data-theme="dark"] .chat-bar-send {
+  background: #ffffff; color: #111111;
+}
+[data-theme="dark"] .chat-bar-send:hover {
+  background: #cccccc; color: #111111;
+}
+[data-theme="dark"] .chat-input-send {
+  background: #ffffff; color: #111111;
+}
+[data-theme="dark"] .chat-input-send:hover {
+  background: #cccccc; color: #111111;
+}
+
+[data-theme="dark"] .btn-coral { color: #111111; }
+[data-theme="dark"] .btn-coral:hover { box-shadow: 0 6px 20px rgba(255,255,255,0.15); }
+
+[data-theme="dark"] .chat-msg.user { background: #ffffff; color: #111111; }
+
+/* Dark mode toggle button */
+.theme-toggle {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: none; border: 1px solid var(--border);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  color: var(--text-secondary); flex-shrink: 0;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+.theme-toggle:hover { background: var(--bg-tertiary); color: var(--text-primary); }
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle .icon-moon { display: block; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
 
 html { scroll-behavior: smooth; }
 
@@ -236,7 +333,7 @@ section { padding: 100px 32px; }
   flex-shrink: 0;
   transition: background var(--transition), transform var(--transition);
 }
-.chat-bar-send:hover { background: #6f1d1b; transform: scale(1.05); }
+.chat-bar-send:hover { background: var(--coral-light); transform: scale(1.05); }
 
 .chat-bar-hint {
   font-size: 12px; color: var(--text-tertiary); margin-top: 8px;
@@ -363,7 +460,7 @@ section { padding: 100px 32px; }
   flex-shrink: 0;
   transition: background var(--transition);
 }
-.chat-input-send:hover { background: #6f1d1b; }
+.chat-input-send:hover { background: var(--coral-light); }
 
 @media (max-width: 768px) {
   .chat-bar-wrapper { max-width: 100%; }
@@ -398,9 +495,9 @@ section { padding: 100px 32px; }
 .btn-primary:hover { background: var(--accent-hover); box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3); }
 .btn-coral {
   background: var(--coral); color: #fff;
-  box-shadow: 0 2px 8px rgba(111, 29, 27, 0.3);
+  box-shadow: 0 2px 8px rgba(46, 196, 182, 0.3);
 }
-.btn-coral:hover { background: #4f1312; box-shadow: 0 6px 20px rgba(111, 29, 27, 0.35); }
+.btn-coral:hover { background: var(--coral-light); box-shadow: 0 6px 20px rgba(46, 196, 182, 0.35); }
 .btn-secondary {
   background: var(--bg-tertiary); color: var(--text-primary);
   border: 1px solid var(--border);
@@ -765,6 +862,10 @@ footer {
       <li><a href="#projects">Projects</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+      <svg class="icon-moon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
     <button class="mobile-toggle" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -1107,6 +1208,13 @@ footer {
 </section>
 
 <script>
+function getParticleColor() {
+  return document.documentElement.getAttribute('data-theme') === 'dark'
+    ? '255, 255, 255'
+    : '46, 196, 182';
+}
+</script>
+<script>
   (function () {
     const CONFIG = {
       width:           120,
@@ -1180,7 +1288,7 @@ footer {
         const radius = CONFIG.dotSize * (0.4 + depth * 0.7);
         ctx.beginPath();
         ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${CONFIG.color}, ${alpha})`;
+        ctx.fillStyle = `rgba(${getParticleColor()}, ${alpha})`;
         ctx.fill();
       }
       requestAnimationFrame(draw);
@@ -1254,6 +1362,26 @@ footer {
      JAVASCRIPT
      ============================================================ -->
 <script>
+// Dark mode toggle
+(function() {
+  const html = document.documentElement;
+  const btn = document.getElementById('theme-toggle');
+  const saved = localStorage.getItem('theme');
+  if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    html.setAttribute('data-theme', 'dark');
+  }
+  btn.addEventListener('click', () => {
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      html.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'light');
+    } else {
+      html.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    }
+  });
+})();
+
 // Scroll progress bar
 const progressBar = document.getElementById('scroll-progress');
 window.addEventListener('scroll', () => {
@@ -1379,7 +1507,7 @@ function sendEmail() {
       const alpha  = 0.15 + depth * 0.85;
       const radius = CONFIG.dotSize * (0.4 + depth * 0.7);
       ctx.beginPath(); ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${CONFIG.color}, ${alpha})`; ctx.fill();
+      ctx.fillStyle = `rgba(${getParticleColor()}, ${alpha})`; ctx.fill();
     }
     requestAnimationFrame(draw);
   }
@@ -1464,7 +1592,7 @@ function sendEmail() {
       const alpha = 0.15 + depth * 0.85;
       const radius = CONFIG.dotSize * (0.4 + depth * 0.7);
       ctx.beginPath(); ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${CONFIG.color}, ${alpha})`; ctx.fill();
+      ctx.fillStyle = `rgba(${getParticleColor()}, ${alpha})`; ctx.fill();
     }
     requestAnimationFrame(draw);
   }
@@ -1524,7 +1652,7 @@ function sendEmail() {
       const alpha = 0.15 + depth * 0.85;
       const radius = CONFIG.dotSize * (0.4 + depth * 0.7);
       ctx.beginPath(); ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${CONFIG.color}, ${alpha})`; ctx.fill();
+      ctx.fillStyle = `rgba(${getParticleColor()}, ${alpha})`; ctx.fill();
     }
     requestAnimationFrame(draw);
   }
@@ -1609,7 +1737,7 @@ function sendEmail() {
       const alpha = 0.15 + depth * 0.85;
       const radius = CONFIG.dotSize * (0.4 + depth * 0.7);
       ctx.beginPath(); ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${CONFIG.color}, ${alpha})`; ctx.fill();
+      ctx.fillStyle = `rgba(${getParticleColor()}, ${alpha})`; ctx.fill();
     }
     requestAnimationFrame(draw);
   }
